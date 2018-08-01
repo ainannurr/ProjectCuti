@@ -22,8 +22,8 @@ public class MyConnection {
             ods.setServerName("localhost");
             ods.setPortNumber(1521);
             ods.setServiceName("XE");
-            ods.setUser("DINA");
-            ods.setPassword("DINA");
+            ods.setUser("system");
+            ods.setPassword("dina");
             connect = ods.getConnection();
             connect.createStatement()
                     .execute("alter session set "

@@ -13,9 +13,9 @@ import java.util.List;
  * @author Simbok_pc
  */
 public interface DetailCutiInterfaceController {
-    public boolean save (String detailKhususId, String karyawanId, String cutiId, 
+    public boolean save (String detailCutiId, String karyawanId, String cutiId, 
             String cutiKhususId, String tanggalAwal, String tanggalAkhir, String alasanCuti, String statusCuti);
-    public boolean edit (String detailKhususId, String karyawanId, String cutiId, 
+    public boolean edit (String detailCutiId, String karyawanId, String cutiId, 
             String cutiKhususId, String tanggalAwal, String tanggalAkhir, String alasanCuti, String statusCuti);
     public boolean drop (String id);
     public List<DetailCuti> binding();

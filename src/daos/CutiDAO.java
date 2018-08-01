@@ -24,10 +24,20 @@ public class CutiDAO implements CutiInterfaceDAO{
     
     public CutiDAO(){
     }
+    
+    /**
+     * fungsi untuk memanggil koneksi
+     * @param connection 
+     */
     public CutiDAO(Connection connection){
         this.connection=connection;
     }
 
+    /**
+     * fungsi ini digunakan untuk insert data pada tabel Cuti
+     * @param cuti
+     * @return true / false
+     */
     @Override
     public boolean insert(Cuti cuti) {
         boolean flag = false;
@@ -46,6 +56,11 @@ public class CutiDAO implements CutiInterfaceDAO{
         return flag;
     }
 
+    /**
+     * fungsi ini digunakan mengedit data pada tabel Cuti
+     * @param cuti
+     * @return true / false
+     */
     @Override
     public boolean update(Cuti cuti) {
         String query = "UPDATE Departments SET lama_cuti=?, sisa_tahun_ini=?, sisa_tahun_lalu=? WHERE cuti_id=?";
@@ -63,6 +78,11 @@ public class CutiDAO implements CutiInterfaceDAO{
         return false;
     }
 
+    /**
+     * fungsi ini digunakan untuk menghapus data pada tabel Cuti
+     * @param id String
+     * @return true / false
+     */
     @Override
     public boolean delete(String id) {
         String query = "DELETE FROM Cuti WHERE cuti_id=?";
@@ -77,6 +97,10 @@ public class CutiDAO implements CutiInterfaceDAO{
         return false;
     }
 
+    /**
+     * fungsi ini diguakan untuk menggambil/menampilkan data dari Tabel Cuti
+     * @return 
+     */
     @Override
     public List<Cuti> getAll() {
        List<Cuti> datas = new ArrayList<>();
@@ -86,10 +110,10 @@ public class CutiDAO implements CutiInterfaceDAO{
             ResultSet rs=preparedStatement.executeQuery();
             while(rs.next()){
                 Cuti cuti=new Cuti();
-                cuti.setCutiId(rs.getString("cuti_id"));
+                cuti.setCutiId(rs.getString("id_cuti"));
                 cuti.setLamaCuti(rs.getInt("lama_cuti"));
-                cuti.setSisaTahunIni(rs.getInt("sisa_tahun_ini"));
-                cuti.setSisaTahunLalu(rs.getInt("sisa_tahun_lalu"));
+                cuti.setSisaTahunIni(rs.getInt("sisa_tahunini"));
+                cuti.setSisaTahunLalu(rs.getInt("sisa_tahunlalu"));
                 datas.add(cuti);
             }
         } catch (SQLException ex) {
@@ -98,6 +122,12 @@ public class CutiDAO implements CutiInterfaceDAO{
         return datas; 
     }
 
+    /**
+     * fungsi ini digunakan untuk menampilkan data dari tabel Cuti berdasarkan parameter
+     * @param category String --> parameter kategori yang akan dijadikan acuan mengurutkan data
+     * @param sort String --> mengurutkan data berdasarkan asc/desc
+     * @return 
+     */
     @Override
     public List<Cuti> getAllSort(String category, String sort) {
         List<Cuti> datas = new ArrayList<>();
@@ -107,10 +137,10 @@ public class CutiDAO implements CutiInterfaceDAO{
             ResultSet rs=preparedStatement.executeQuery();
             while(rs.next()){
                 Cuti cuti = new Cuti();
-                cuti.setCutiId(rs.getString("cuti_id"));
+                cuti.setCutiId(rs.getString("id_cuti"));
                 cuti.setLamaCuti(rs.getInt("lama_cuti"));
-                cuti.setSisaTahunIni(rs.getInt("sisa_tahun_ini"));
-                cuti.setSisaTahunLalu(rs.getInt("sisa_tahun_lalu"));
+                cuti.setSisaTahunIni(rs.getInt("sisa_tahunini"));
+                cuti.setSisaTahunLalu(rs.getInt("sisa_tahunlalu"));
                 datas.add(cuti);
             }
         } catch (SQLException ex) {
@@ -119,6 +149,12 @@ public class CutiDAO implements CutiInterfaceDAO{
         return datas;
     }
 
+    /**
+     * fungsi ini digunakan mencari data dari tabel Cuti dengan parameter tertentu
+     * @param category String --> parameter katgori yang akan dicari
+     * @param data String --> parameter kata kunci
+     * @return 
+     */
     @Override
     public List<Cuti> search(String category, String data) {
         List<Cuti> datas = new ArrayList<>();
@@ -140,6 +176,11 @@ public class CutiDAO implements CutiInterfaceDAO{
         return datas;
     }
 
+    /**
+     * fungsi ini digunakan untuk menampilkan data dari tabel Cuti dengan parameter id
+     * @param id Integer
+     * @return 
+     */
     @Override
     public Cuti getById(String id) {
         Cuti cuti = new Cuti();

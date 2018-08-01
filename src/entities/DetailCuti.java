@@ -15,7 +15,7 @@ public class DetailCuti {
     private String detailCutiId;
     private String karyawanId;
     private String cutiId;
-    private String cutiKhusuId;
+    private String cutiKhususId;
     private Date tanggalAwal;
     private Date tanggalAkhir;
     private String alasanCuti;
@@ -28,7 +28,7 @@ public class DetailCuti {
         this.detailCutiId = detailCutiId;
         this.karyawanId = karyawanId;
         this.cutiId = cutiId;
-        this.cutiKhusuId = cutiKhusuId;
+        this.cutiKhususId = cutiKhusuId;
         this.tanggalAwal = tanggalAwal;
         this.tanggalAkhir = tanggalAkhir;
         this.alasanCuti = alasanCuti;
@@ -59,12 +59,12 @@ public class DetailCuti {
         this.cutiId = cutiId;
     }
 
-    public String getCutiKhusuId() {
-        return cutiKhusuId;
+    public String getCutiKhususId() {
+        return cutiKhususId;
     }
 
-    public void setCutiKhusuId(String cutiKhusuId) {
-        this.cutiKhusuId = cutiKhusuId;
+    public void setCutiKhususId(String cutiKhususId) {
+        this.cutiKhususId = cutiKhususId;
     }
 
     public Date getTanggalAwal() {
@@ -98,7 +98,4 @@ public class DetailCuti {
     public void setStatusCuti(String statusCuti) {
         this.statusCuti = statusCuti;
     }
-   
-    
- 
 }

@@ -27,23 +27,13 @@ public class CutiKhususController implements CutiKhususInterfaceController{
 
     @Override
     public boolean save(String cutiKhususId, String keteranganCuti, String lamaCuti) {
-        CutiKhusus cutiKhusus = new CutiKhusus();
-        cutiKhusus.setCutiKhususId(cutiKhususId);
-        cutiKhusus.setKeteranganCuti(keteranganCuti);
-        cutiKhusus.setLamaCuti(Integer.parseInt(lamaCuti));
-        return this.cutiKhususDAO.insert(cutiKhusus);
+        return this.cutiKhususDAO.insert(new CutiKhusus(cutiKhususId, keteranganCuti, Integer.parseInt(lamaCuti)));
     }
 
     @Override
     public boolean edit(String cutiKhususId, String keteranganCuti, String lamaCuti) {
-        CutiKhusus cutiKhusus = new CutiKhusus();
-        cutiKhusus.setCutiKhususId(cutiKhususId);
-        cutiKhusus.setKeteranganCuti(keteranganCuti);
-        cutiKhusus.setLamaCuti(Integer.parseInt(lamaCuti));
-        cutiKhusus.getCutiKhususId();
-        cutiKhusus.getKeteranganCuti();
-        cutiKhusus.getLamaCuti();
-        return this.cutiKhususDAO.update(cutiKhusus);}
+        return this.cutiKhususDAO.update(new CutiKhusus(cutiKhususId, keteranganCuti, Integer.parseInt(lamaCuti)));
+    }
 
     @Override
     public boolean drop(String id) {

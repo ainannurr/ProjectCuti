@@ -25,10 +25,20 @@ public class CutiKhususDAO implements CutiKhususInterfaceDAO {
     public CutiKhususDAO(){
         
     }
+    
+    /**
+     * fungsi untuk memanggil koneksi
+     * @param connection 
+     */
     public CutiKhususDAO(Connection connection) {
         this.connection = connection;
     }
 
+    /**
+     * fungsi ini digunakan untuk insert data pada tabel CutiKhusus
+     * @param cutiKhusus
+     * @return true / false
+     */
     @Override
     public boolean insert(CutiKhusus cutiKhusus) {
         boolean flag = false;
@@ -46,6 +56,11 @@ public class CutiKhususDAO implements CutiKhususInterfaceDAO {
         return flag;
     }
 
+    /**
+     * fungsi ini digunakan mengedit data pada tabel CutiKhusus
+     * @param cutiKhusus
+     * @return true / false
+     */
     @Override
     public boolean update(CutiKhusus cutiKhusus) {
         String query = "UPDATE Departments SET keterangan_cuti=?, lama_cuti=? WHERE cuti_khusus_id=?";    
@@ -62,6 +77,11 @@ public class CutiKhususDAO implements CutiKhususInterfaceDAO {
         return false;
     }
 
+    /**
+     * fungsi ini digunakan untuk menghapus data pada tabel CutiKhusus
+     * @param id String
+     * @return true / false
+     */
     @Override
     public boolean delete(String id) {
         String query = "DELETE FROM CutiKhusus WHERE cuti_khusus_id=?";
@@ -76,6 +96,10 @@ public class CutiKhususDAO implements CutiKhususInterfaceDAO {
         return false;
     }
 
+    /**
+     * fungsi ini diguakan untuk menggambil/menampilkan data dari Tabel CutiKhusus
+     * @return 
+     */
     @Override
     public List<CutiKhusus> getAll() {
         List<CutiKhusus> datas = new ArrayList<>();
@@ -96,6 +120,12 @@ public class CutiKhususDAO implements CutiKhususInterfaceDAO {
         return datas ; 
     }
 
+    /**
+     * fungsi ini digunakan untuk menampilkan data dari tabel CutiKhusus berdasarkan parameter
+     * @param category String --> parameter kategori yang akan dijadikan acuan mengurutkan data
+     * @param sort String --> mengurutkan data berdasarkan asc/desc
+     * @return 
+     */
     @Override
     public List<CutiKhusus> getAllSort(String category, String sort) {
         List<CutiKhusus> datas = new ArrayList<>();
@@ -116,6 +146,12 @@ public class CutiKhususDAO implements CutiKhususInterfaceDAO {
         return datas;
     }
 
+    /**
+     * fungsi ini digunakan mencari data dari tabel CutiKhusus dengan parameter tertentu
+     * @param category parameter katgori yang akan dicari
+     * @param data String --> parameter kata kunci
+     * @return 
+     */
     @Override
     public List<CutiKhusus> search(String category, String data) {
         List<CutiKhusus> datas = new ArrayList<>();
@@ -136,7 +172,11 @@ public class CutiKhususDAO implements CutiKhususInterfaceDAO {
         return datas;
     }
 
-
+    /**
+     * fungsi ini digunakan untuk menampilkan data dari tabel CutiKhusus dengan parameter id
+     * @param id Integer
+     * @return 
+     */
     @Override
     public CutiKhusus getById(String id) {
         CutiKhusus cutiKhusus = new CutiKhusus();

@@ -26,26 +26,12 @@ public class CutiController implements CutiInterfaceController{
 
     @Override
     public boolean save(String cutiId, String lamaCuti, String sisaTahunIni, String sisaTahunLalu) {
-        Cuti cuti = new Cuti();
-        cuti.setCutiId(cutiId);
-        cuti.setLamaCuti(Integer.parseInt(lamaCuti));
-        cuti.setSisaTahunIni(Integer.parseInt(sisaTahunIni));
-        cuti.setSisaTahunLalu(Integer.parseInt(sisaTahunLalu));
-        return this.cutiDAO.insert(cuti);
+        return this.cutiDAO.insert(new Cuti(cutiId, Integer.parseInt(lamaCuti), Integer.parseInt(sisaTahunIni), Integer.parseInt(sisaTahunLalu)));
     }
 
     @Override
     public boolean edit(String cutiId, String lamaCuti, String sisaTahunIni, String sisaTahunLalu) {
-        Cuti cuti = new Cuti();
-        cuti.setCutiId(cutiId);
-        cuti.setLamaCuti(Integer.parseInt(lamaCuti));
-        cuti.setSisaTahunIni(Integer.parseInt(sisaTahunIni));
-        cuti.setSisaTahunLalu(Integer.parseInt(sisaTahunLalu));
-        cuti.getCutiId();
-        cuti.getLamaCuti();
-        cuti.getSisaTahunIni();
-        cuti.getSisaTahunLalu();
-        return this.cutiDAO.update(cuti);
+        return this.cutiDAO.update(new Cuti(cutiId, Integer.parseInt(lamaCuti), Integer.parseInt(sisaTahunIni), Integer.parseInt(sisaTahunLalu)));
     }
 
     @Override

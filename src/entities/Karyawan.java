@@ -18,10 +18,11 @@ public class Karyawan {
     public Karyawan() {
     }
 
-    public Karyawan(String karyawanId, String namaKaryawan, String email) {
+    public Karyawan(String karyawanId, String namaKaryawan, String email, String jabatanId) {
         this.karyawanId = karyawanId;
         this.namaKaryawan = namaKaryawan;
         this.email = email;
+        this.jabatanId = jabatanId;
     }
 
     /**

@@ -11,16 +11,16 @@ package entities;
  */
 public class CutiKhusus {
     private String cutiKhususId;
-    private String keteranganCuti;
-    private int lamaCuti;
+    private String namaCuti;
+    
 
     public CutiKhusus() {
     }
 
-    public CutiKhusus(String cutiKhususId, String keteranganCuti, int lamaCuti) {
+    public CutiKhusus(String cutiKhususId, String namaCuti) {
         this.cutiKhususId = cutiKhususId;
-        this.keteranganCuti = keteranganCuti;
-        this.lamaCuti = lamaCuti;
+        this.namaCuti = namaCuti;
+        
     }
    
     /**
@@ -40,29 +40,15 @@ public class CutiKhusus {
     /**
      * @return the keteranganCuti
      */
-    public String getKeteranganCuti() {
-        return keteranganCuti;
+    public String getNamaCuti() {
+        return namaCuti;
     }
 
     /**
-     * @param keteranganCuti the keteranganCuti to set
+     * @param namaCuti the keteranganCuti to set
      */
-    public void setKeteranganCuti(String keteranganCuti) {
-        this.keteranganCuti = keteranganCuti;
+    public void setNamaCuti(String namaCuti) {
+        this.namaCuti = namaCuti;
     }
-
-    /**
-     * @return the lamaCuti
-     */
-    public int getLamaCuti() {
-        return lamaCuti;
-    }
-
-    /**
-     * @param lamaCuti the lamaCuti to set
-     */
-    public void setLamaCuti(int lamaCuti) {
-        this.lamaCuti = lamaCuti;
-    }
-    
+ 
 }

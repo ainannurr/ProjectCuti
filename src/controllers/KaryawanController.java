@@ -25,13 +25,13 @@ public class KaryawanController implements KaryawanInterfaceController{
     }
 
     @Override
-    public boolean save(String karyawanId, String karyawanName, String email, String jabatanId) {
-        return this.karyawanDAO.insert(new Karyawan(karyawanId, karyawanId, email, jabatanId));
+    public boolean save(String karyawanId, String jabatanId, String karyawanName, String email, String alamat, int jatahCuti) {
+        return this.karyawanDAO.insert(new Karyawan(karyawanId, jabatanId, karyawanName, email, alamat, jatahCuti));
     }
 
     @Override
-    public boolean edit(String karyawanId, String karyawanName, String email, String jabatanId) {
-        return this.karyawanDAO.update(new Karyawan(karyawanId, karyawanId, email, jabatanId));
+    public boolean edit(String karyawanId, String jabatanId, String karyawanName, String email, String alamat, int jatahCuti) {
+        return this.karyawanDAO.update(new Karyawan(karyawanId, jabatanId, karyawanName, email, alamat, jatahCuti));
     }
 
     @Override

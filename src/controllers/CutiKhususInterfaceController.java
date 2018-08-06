@@ -13,8 +13,8 @@ import java.util.List;
  * @author Simbok_pc
  */
 public interface CutiKhususInterfaceController {
-    public boolean save (String cutiKhususId, String keteranganCuti, String lamaCuti);
-    public boolean edit (String cutiKhususId, String keteranganCuti, String lamaCuti);
+    public boolean save (String cutiKhususId, String namaCuti);
+    public boolean edit (String cutiKhususId, String namaCuti);
     public boolean drop (String id);
     public List<CutiKhusus> binding();
     public List<CutiKhusus> bindingSort(String category, String sort);

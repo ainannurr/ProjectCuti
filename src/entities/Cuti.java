@@ -5,24 +5,28 @@
  */
 package entities;
 
+import java.sql.Date;
+
 /**
  *
  * @author Simbok_pc
  */
 public class Cuti {
     private String cutiId;
-    private int lamaCuti;
-    private int sisaTahunIni;
-    private int sisaTahunLalu;
+    private Date tanggal_awal;
+    private Date tanggal_akhir;
+    private String keterangan;
+    private String idCutiKhusus;
 
     public Cuti() {
     }
 
-    public Cuti(String cutiId, int lamaCuti, int sisaTahunIni, int sisaTahunLalu) {
+    public Cuti(String cutiId, Date tanggal_awal, Date tanggal_akhir, String keterangan, String idCutiKhusus) {
         this.cutiId = cutiId;
-        this.lamaCuti = lamaCuti;
-        this.sisaTahunIni = sisaTahunIni;
-        this.sisaTahunLalu = sisaTahunLalu;
+        this.tanggal_awal = tanggal_awal;
+        this.tanggal_akhir = tanggal_akhir;
+        this.keterangan = keterangan;
+        this.idCutiKhusus = idCutiKhusus;
     }
 
     /**
@@ -40,46 +44,59 @@ public class Cuti {
     }
 
     /**
-     * @return the lamaCuti
+     * @return the tanggal_awal
      */
-    public int getLamaCuti() {
-        return lamaCuti;
+    public Date getTanggal_awal() {
+        return tanggal_awal;
     }
 
     /**
-     * @param lamaCuti the lamaCuti to set
+     * @param tanggal_awal the tanggal_awal to set
      */
-    public void setLamaCuti(int lamaCuti) {
-        this.lamaCuti = lamaCuti;
+    public void setTanggal_awal(Date tanggal_awal) {
+        this.tanggal_awal = tanggal_awal;
     }
 
     /**
-     * @return the sisaTahunIni
+     * @return the tanggal_akhir
      */
-    public int getSisaTahunIni() {
-        return sisaTahunIni;
+    public Date getTanggal_akhir() {
+        return tanggal_akhir;
     }
 
     /**
-     * @param sisaTahunIni the sisaTahunIni to set
+     * @param tanggal_akhir the tanggal_akhir to set
      */
-    public void setSisaTahunIni(int sisaTahunIni) {
-        this.sisaTahunIni = sisaTahunIni;
+    public void setTanggal_akhir(Date tanggal_akhir) {
+        this.tanggal_akhir = tanggal_akhir;
     }
 
     /**
-     * @return the sisaTahunLalu
+     * @return the keterangan
      */
-    public int getSisaTahunLalu() {
-        return sisaTahunLalu;
+    public String getKeterangan() {
+        return keterangan;
     }
 
     /**
-     * @param sisaTahunLalu the sisaTahunLalu to set
+     * @param keterangan the keterangan to set
      */
-    public void setSisaTahunLalu(int sisaTahunLalu) {
-        this.sisaTahunLalu = sisaTahunLalu;
+    public void setKeterangan(String keterangan) {
+        this.keterangan = keterangan;
     }
-    
-    
+
+    /**
+     * @return the idCutiKhusus
+     */
+    public String getIdCutiKhusus() {
+        return idCutiKhusus;
+    }
+
+    /**
+     * @param idCutiKhusus the idCutiKhusus to set
+     */
+    public void setIdCutiKhusus(String idCutiKhusus) {
+        this.idCutiKhusus = idCutiKhusus;
+    }
+
 }

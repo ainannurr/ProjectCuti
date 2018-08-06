@@ -7,11 +7,9 @@ package views;
 
 import controllers.JabatanController;
 import entities.Jabatan;
-import java.sql.Connection;
-import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-//import tools.MyConnection;
+import tools.MyConnection;
 
 /**
  *
@@ -20,22 +18,15 @@ import javax.swing.table.DefaultTableModel;
 public class JabatanView extends javax.swing.JInternalFrame {
     
     private final JabatanController jabatanController;
-    private final ViewProccess viewProccess;
-    private final String[] header = {"Country ID", "Country Name", "Region ID"};
-    private final String[] categories;
-    private final Connection connection;
-    //private final List<Object[]> RegionTemp;
 
     /**
      * Creates new form JabatanView
      */
-    public JabatanView(Connection connection) {
-        this.connection = connection;
-        this.categories = new String[]{"country_id", "country_name", "region_id"};
+    public JabatanView() {
         initComponents();
-        this.jabatanController = new JabatanController(connection);
-        this.viewProccess = new ViewProccess();
-        //this.RegionTemp = this.getDataRegions();
+        this.jabatanController = new JabatanController(new MyConnection().getConnection());
+        bindingTable();
+        reset();
     }
 
     /**
@@ -174,15 +165,37 @@ public class JabatanView extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
-        this.viewProccess.saveData(rootPane, closable, isIcon);
+        boolean flag = this.jabatanController.save(inputJabatanId.getText(), inputJabatanNama.getText());
+        String messege = "Failed to save data!";
+        if (flag){
+            messege = "Success to save data, congratulation!";
+        }
+        JOptionPane.showMessageDialog(this, messege, "Notification", JOptionPane.INFORMATION_MESSAGE);
+        bindingTable();
+        reset();
     }//GEN-LAST:event_btnSaveActionPerformed
 
     private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
-        // TODO add your handling code here:
+        String messege = "Failed to edit data.";
+        if(jabatanController.edit(inputJabatanId.getText(), inputJabatanNama.getText())){
+            messege = "Success to edit data, congratulation!";
+        }
+        JOptionPane.showMessageDialog(this, messege, "Notification", JOptionPane.INFORMATION_MESSAGE);
+        bindingTable();
+        reset();
     }//GEN-LAST:event_btnEditActionPerformed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
-        // TODO add your handling code here:
+        String messege = "Failed to delete data.";
+        int flag = JOptionPane.showConfirmDialog(this, "Are you sure want to delete?", "Alert", JOptionPane.YES_NO_OPTION);
+        if (flag == 0){
+            if(jabatanController.drop(inputJabatanId.getText())){
+                messege = "Success to delete data, congratulation!";
+            }
+            JOptionPane.showMessageDialog(this, messege, "Notification", JOptionPane.QUESTION_MESSAGE);
+        }
+        bindingTable();
+        reset();
     }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void tblJabatanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblJabatanMouseClicked
@@ -206,96 +219,20 @@ public class JabatanView extends javax.swing.JInternalFrame {
     private javax.swing.JTable tblJabatan;
     // End of variables declaration//GEN-END:variables
     
-    /**
-     * fungsi yang digunakan untuk menampilkan tabel pada kelas view
-     */
-    public void bindingTable() {
-        this.viewProccess.viewTable(tblJabatan, header, this.jabatanController.bindingSort(categories[0], "asc"));
-    }
-    
-    /**
-     * fungsi yang digunakan untuk menampilkan kategori dari combo box pada pencarian
-     */
-    public void loadSearchComboBox() {
-        this.viewProccess.loadSearchComboBox(cmbCategory, header);
-    }
-    
-    /**
-     * fungsi yang digunakan untuk mencari objek pada tabel
-     * @param category variable yang digunakan untuk mencari objek
-     * @param data 
-     */
-    public void searchTable(String category, String data) {
-        this.viewProccess.viewTable(tblCountry, header, this.countryController.find(category, data));
-    }
-    
-    public void saveOrEdit(String countryId, String countryName, int region, boolean isSave) {
-        boolean flag = true;
-        if (isSave) {
-            flag = this.countryController.save(inputCountryId.getText(), inputCountryName.getText(), this.getRegionId());
-        } else {
-            flag = this.countryController.edit(inputCountryId.getText(), inputCountryName.getText(), this.getRegionId());
+    public void bindingTable(){
+        String[] header = {"ID Jabatan", "Nama Jabatan"};
+        DefaultTableModel defaultTableModel = new DefaultTableModel(header, 0);
+        for (Jabatan jabatan : jabatanController.bindingSort("jabatan_id", "asc")) {
+            Object[] jabatan1 = {
+                jabatan.getJabatanId(), jabatan.getNamaJabatan()
+            };
+            defaultTableModel.addRow(jabatan1);
         }
-        this.viewProccess.saveData(this, flag, isSave);
-        this.reset();
+        tblJabatan.setModel(defaultTableModel);
     }
     
-    /**
-     * fungsi yang digunakan untuk mengosongkan kembali atau mereset data ketika selesai disimpan
-     */
-    public void reset() {
-        inputJabatanId.setEnabled(true);
+    public void reset(){
+        inputJabatanId.setText("");
         inputJabatanNama.setText("");
-        cmbRegion.setSelectedItem("");
-        inputSearch.setText("");
-        this.bindingTable();
-        btnDrop.setEnabled(false);
     }
-    
-    /**
-     * fungsi yang digunakan untuk menampilkan dialog konfirmasi penghapusan data
-     * @param countryId 
-     */
-    public void drop(String countryId) {
-        if (this.viewProccess.dropConfirm(this)) {
-            this.viewProccess.dropData(this, this.countryController.drop(countryId));
-        }
-        this.reset();
-    }
-    
-    /**
-     * fungsi yang digunakan untuk mengaktifkan data dengan menunjuk data dengan menggunakan mouse
-     * @param row variable yang digunakan untuk menghitung baris yang akan dipilih
-     */
-    private void mouseClicked(int row) {
-        inputCountryId.setEnabled(false);
-        btnDrop.setEnabled(true);
-        inputCountryId.setText(tblCountry.getValueAt(row, 0).toString());
-        inputCountryName.setText(tblCountry.getValueAt(row, 1).toString());
-        cmbRegion.setSelectedItem(tblCountry.getValueAt(row, 2).toString());
-    }
-    
-    /**
-     * fungsi yang digunakan untuk menampilkan data Region
-     * @return 
-     */
-    private List<Object[]> getDataRegions() {
-        return new RegionController(connection).bindingSort("region_id", "asc");
-    }
-    
-    /**
-     * fungsi yang digunakan untuk menampilkan objek dari region ketika memasukkan data
-     */
-    public void loadRegion() {
-        this.viewProccess.loadDetails(cmbRegion, new RegionController(connection).binding(), 1);
-    }
-    
-    /**
-     * fungsi yang digunakan untuk menampilkan Region ID
-     * @return 
-     */
-    private String getRegionId(){
-        return this.viewProccess.getIdfromComboBox(this.RegionTemp, cmbRegion.getSelectedIndex());
-    }
-
 }

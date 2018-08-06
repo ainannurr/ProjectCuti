@@ -5,9 +5,13 @@
  */
 package views;
 
+import entities.CutiKhusus;
+import java.sql.Connection;
+import tools.MyConnection;
+
 /**
  *
- * @author Simbok_pc
+ * @author AINAN-Gaul
  */
 public class MainView extends javax.swing.JFrame {
 
@@ -28,30 +32,126 @@ public class MainView extends javax.swing.JFrame {
     private void initComponents() {
 
         jMenuItem1 = new javax.swing.JMenuItem();
-        dskMaster = new javax.swing.JDesktopPane();
+        jMenuBar2 = new javax.swing.JMenuBar();
+        jMenu3 = new javax.swing.JMenu();
+        jMenu4 = new javax.swing.JMenu();
+        jMenuBar3 = new javax.swing.JMenuBar();
+        jMenu5 = new javax.swing.JMenu();
+        jMenu6 = new javax.swing.JMenu();
+        jMenuItem2 = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
+        jMenuItem3 = new javax.swing.JMenuItem();
+        jMenu7 = new javax.swing.JMenu();
+        jMenuBar4 = new javax.swing.JMenuBar();
+        jMenu8 = new javax.swing.JMenu();
+        jMenu9 = new javax.swing.JMenu();
+        jMenuBar5 = new javax.swing.JMenuBar();
+        jMenu10 = new javax.swing.JMenu();
+        jMenu11 = new javax.swing.JMenu();
+        dsktMaster = new javax.swing.JDesktopPane();
+        dsktForm = new javax.swing.JDesktopPane();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
+        mnJabatan = new javax.swing.JMenuItem();
+        mnKaryawan = new javax.swing.JMenuItem();
+        mnCutiKhusus = new javax.swing.JMenuItem();
         mnCuti = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
+        mnDetailCuti = new javax.swing.JMenuItem();
+        mnForm = new javax.swing.JMenu();
+        formPengajuanCuti = new javax.swing.JMenuItem();
+        jMenu13 = new javax.swing.JMenu();
+        mnDetail = new javax.swing.JMenuItem();
 
         jMenuItem1.setText("jMenuItem1");
 
+        jMenu3.setText("File");
+        jMenuBar2.add(jMenu3);
+
+        jMenu4.setText("Edit");
+        jMenuBar2.add(jMenu4);
+
+        jMenu5.setText("File");
+        jMenuBar3.add(jMenu5);
+
+        jMenu6.setText("Edit");
+        jMenuBar3.add(jMenu6);
+
+        jMenuItem2.setText("jMenuItem2");
+
+        jMenu2.setText("jMenu2");
+
+        jMenuItem3.setText("jMenuItem3");
+
+        jMenu7.setText("jMenu7");
+
+        jMenu8.setText("File");
+        jMenuBar4.add(jMenu8);
+
+        jMenu9.setText("Edit");
+        jMenuBar4.add(jMenu9);
+
+        jMenu10.setText("File");
+        jMenuBar5.add(jMenu10);
+
+        jMenu11.setText("Edit");
+        jMenuBar5.add(jMenu11);
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        javax.swing.GroupLayout dskMasterLayout = new javax.swing.GroupLayout(dskMaster);
-        dskMaster.setLayout(dskMasterLayout);
-        dskMasterLayout.setHorizontalGroup(
-            dskMasterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 687, Short.MAX_VALUE)
+        javax.swing.GroupLayout dsktFormLayout = new javax.swing.GroupLayout(dsktForm);
+        dsktForm.setLayout(dsktFormLayout);
+        dsktFormLayout.setHorizontalGroup(
+            dsktFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 335, Short.MAX_VALUE)
         );
-        dskMasterLayout.setVerticalGroup(
-            dskMasterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 500, Short.MAX_VALUE)
+        dsktFormLayout.setVerticalGroup(
+            dsktFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 278, Short.MAX_VALUE)
         );
 
-        jMenu1.setText("Menu");
+        dsktMaster.setLayer(dsktForm, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-        mnCuti.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.CTRL_MASK));
+        javax.swing.GroupLayout dsktMasterLayout = new javax.swing.GroupLayout(dsktMaster);
+        dsktMaster.setLayout(dsktMasterLayout);
+        dsktMasterLayout.setHorizontalGroup(
+            dsktMasterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(dsktMasterLayout.createSequentialGroup()
+                .addComponent(dsktForm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 374, Short.MAX_VALUE))
+        );
+        dsktMasterLayout.setVerticalGroup(
+            dsktMasterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(dsktMasterLayout.createSequentialGroup()
+                .addComponent(dsktForm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 227, Short.MAX_VALUE))
+        );
+
+        jMenu1.setText("Master");
+
+        mnJabatan.setText("Jabatan");
+        mnJabatan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnJabatanActionPerformed(evt);
+            }
+        });
+        jMenu1.add(mnJabatan);
+
+        mnKaryawan.setText("Karyawan");
+        mnKaryawan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnKaryawanActionPerformed(evt);
+            }
+        });
+        jMenu1.add(mnKaryawan);
+
+        mnCutiKhusus.setText("Cuti Khusus");
+        mnCutiKhusus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnCutiKhususActionPerformed(evt);
+            }
+        });
+        jMenu1.add(mnCutiKhusus);
+
         mnCuti.setText("Cuti");
         mnCuti.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -60,10 +160,40 @@ public class MainView extends javax.swing.JFrame {
         });
         jMenu1.add(mnCuti);
 
+        mnDetailCuti.setText("Detail Cuti");
+        mnDetailCuti.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnDetailCutiActionPerformed(evt);
+            }
+        });
+        jMenu1.add(mnDetailCuti);
+
         jMenuBar1.add(jMenu1);
 
-        jMenu2.setText("About");
-        jMenuBar1.add(jMenu2);
+        mnForm.setText("Form");
+
+        formPengajuanCuti.setText("Pengajuan Cuti");
+        formPengajuanCuti.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                formPengajuanCutiActionPerformed(evt);
+            }
+        });
+        mnForm.add(formPengajuanCuti);
+
+        jMenuBar1.add(mnForm);
+
+        jMenu13.setText("Direktur");
+
+        mnDetail.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F1, java.awt.event.InputEvent.CTRL_MASK));
+        mnDetail.setText("Detail");
+        mnDetail.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnDetailActionPerformed(evt);
+            }
+        });
+        jMenu13.add(mnDetail);
+
+        jMenuBar1.add(jMenu13);
 
         setJMenuBar(jMenuBar1);
 
@@ -71,21 +201,61 @@ public class MainView extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(dskMaster)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(dsktMaster, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(dskMaster)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(dsktMaster, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void mnCutiKhususActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnCutiKhususActionPerformed
+        CutiKhususView cutiKhususView = new CutiKhususView();
+        cutiKhususView.show();
+        dsktMaster.add(cutiKhususView);
+    }//GEN-LAST:event_mnCutiKhususActionPerformed
+
+    private void mnKaryawanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnKaryawanActionPerformed
+        KaryawanView karyawanView = new KaryawanView();
+        karyawanView.show();
+        dsktMaster.add(karyawanView);
+    }//GEN-LAST:event_mnKaryawanActionPerformed
+
+    private void mnJabatanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnJabatanActionPerformed
+        JabatanView jabatanView = new JabatanView();
+        jabatanView.show();
+        dsktMaster.add(jabatanView);
+    }//GEN-LAST:event_mnJabatanActionPerformed
+
     private void mnCutiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnCutiActionPerformed
-        CutiView open = new CutiView();
-        open.show();
-        dskMaster.add(open);
+        CutiView cutiView = new CutiView();
+        cutiView.show();
+        dsktMaster.add(cutiView);
     }//GEN-LAST:event_mnCutiActionPerformed
+
+    private void mnDetailCutiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnDetailCutiActionPerformed
+        DetailCutiView detailCutiView = new DetailCutiView();
+        detailCutiView.show();
+        dsktMaster.add(detailCutiView);
+    }//GEN-LAST:event_mnDetailCutiActionPerformed
+
+    private void formPengajuanCutiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_formPengajuanCutiActionPerformed
+        FormView formView = new FormView();
+        formView.show();
+        dsktForm.add(formView);
+    }//GEN-LAST:event_formPengajuanCutiActionPerformed
+
+    private void mnDetailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnDetailActionPerformed
+//        DirekturView direkturView = new DirekturView();
+//        direkturView.show();
+//        dsktMaster.add(direkturView);
+    }//GEN-LAST:event_mnDetailActionPerformed
 
     /**
      * @param args the command line arguments
@@ -123,11 +293,35 @@ public class MainView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JDesktopPane dskMaster;
+    private javax.swing.JDesktopPane dsktForm;
+    private javax.swing.JDesktopPane dsktMaster;
+    private javax.swing.JMenuItem formPengajuanCuti;
     private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu10;
+    private javax.swing.JMenu jMenu11;
+    private javax.swing.JMenu jMenu13;
     private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenu4;
+    private javax.swing.JMenu jMenu5;
+    private javax.swing.JMenu jMenu6;
+    private javax.swing.JMenu jMenu7;
+    private javax.swing.JMenu jMenu8;
+    private javax.swing.JMenu jMenu9;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuBar jMenuBar2;
+    private javax.swing.JMenuBar jMenuBar3;
+    private javax.swing.JMenuBar jMenuBar4;
+    private javax.swing.JMenuBar jMenuBar5;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem mnCuti;
+    private javax.swing.JMenuItem mnCutiKhusus;
+    private javax.swing.JMenuItem mnDetail;
+    private javax.swing.JMenuItem mnDetailCuti;
+    private javax.swing.JMenu mnForm;
+    private javax.swing.JMenuItem mnJabatan;
+    private javax.swing.JMenuItem mnKaryawan;
     // End of variables declaration//GEN-END:variables
 }

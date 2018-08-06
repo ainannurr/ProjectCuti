@@ -42,12 +42,11 @@ public class CutiKhususDAO implements CutiKhususInterfaceDAO {
     @Override
     public boolean insert(CutiKhusus cutiKhusus) {
         boolean flag = false;
-        String query = "INSERT INTO CutiKhusus VALUES(?,?,?)";    
+        String query = "INSERT INTO Cuti_Khusus VALUES(?,?)";    
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, cutiKhusus.getCutiKhususId());
-            preparedStatement.setString(2, cutiKhusus.getKeteranganCuti());
-            preparedStatement.setInt(3, cutiKhusus.getLamaCuti());
+            preparedStatement.setString(2, cutiKhusus.getNamaCuti());
             preparedStatement.executeUpdate();
             flag = true;
         } catch (SQLException ex) {
@@ -63,12 +62,11 @@ public class CutiKhususDAO implements CutiKhususInterfaceDAO {
      */
     @Override
     public boolean update(CutiKhusus cutiKhusus) {
-        String query = "UPDATE Departments SET keterangan_cuti=?, lama_cuti=? WHERE cuti_khusus_id=?";    
+        String query = "UPDATE Cuti_Khusus SET nama_cuti=? WHERE id_cuti_khusus=?";    
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(1, cutiKhusus.getKeteranganCuti());
-            preparedStatement.setInt(2, cutiKhusus.getLamaCuti());
-            preparedStatement.setString(3, cutiKhusus.getCutiKhususId());
+            preparedStatement.setString(1, cutiKhusus.getNamaCuti());
+            preparedStatement.setString(2, cutiKhusus.getCutiKhususId());
             preparedStatement.executeUpdate();
             return true;
         } catch (SQLException ex) {
@@ -84,7 +82,7 @@ public class CutiKhususDAO implements CutiKhususInterfaceDAO {
      */
     @Override
     public boolean delete(String id) {
-        String query = "DELETE FROM CutiKhusus WHERE cuti_khusus_id=?";
+        String query = "DELETE FROM Cuti_Khusus WHERE id_cuti_khusus=?";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, id);
@@ -103,15 +101,14 @@ public class CutiKhususDAO implements CutiKhususInterfaceDAO {
     @Override
     public List<CutiKhusus> getAll() {
         List<CutiKhusus> datas = new ArrayList<>();
-        String query="SELECT * FROM CutiKhusus";
+        String query="SELECT * FROM Cuti_Khusus";
         try {
             PreparedStatement preparedStatement=connection.prepareStatement(query);
             ResultSet rs=preparedStatement.executeQuery();
             while(rs.next()){
                 CutiKhusus cutiKhusus = new CutiKhusus();
-                cutiKhusus.setCutiKhususId(rs.getString("cuti_khusus_id"));
-                cutiKhusus.setKeteranganCuti(rs.getString("keterangan_cuti"));
-                cutiKhusus.setLamaCuti(rs.getInt("lama_cuti"));
+                cutiKhusus.setCutiKhususId(rs.getString("id_cuti_khusus"));
+                cutiKhusus.setNamaCuti(rs.getString("nama_cuti"));
                 datas.add(cutiKhusus);
             }
         } catch (SQLException ex) {
@@ -129,15 +126,14 @@ public class CutiKhususDAO implements CutiKhususInterfaceDAO {
     @Override
     public List<CutiKhusus> getAllSort(String category, String sort) {
         List<CutiKhusus> datas = new ArrayList<>();
-        String query="SELECT * FROM CutiKhusus ORDER BY "+category+" "+sort;
+        String query="SELECT * FROM Cuti_Khusus ORDER BY "+category+" "+sort;
         try {
             PreparedStatement preparedStatement=connection.prepareStatement(query);
             ResultSet rs=preparedStatement.executeQuery();
             while(rs.next()){
                 CutiKhusus cutiKhusus = new CutiKhusus();
-                cutiKhusus.setCutiKhususId(rs.getString("cuti_khusus_id"));
-                cutiKhusus.setKeteranganCuti(rs.getString("keterangan_cuti"));
-                cutiKhusus.setLamaCuti(rs.getInt("lama_cuti"));
+                cutiKhusus.setCutiKhususId(rs.getString("id_cuti_khusus"));
+                cutiKhusus.setNamaCuti(rs.getString("nama_cuti"));
                 datas.add(cutiKhusus);
             }
         } catch (SQLException ex) {
@@ -155,15 +151,14 @@ public class CutiKhususDAO implements CutiKhususInterfaceDAO {
     @Override
     public List<CutiKhusus> search(String category, String data) {
         List<CutiKhusus> datas = new ArrayList<>();
-        String query="SELECT * FROM CutiKhusus WHERE "+category+" LIKE '%"+data+"%'";
+        String query="SELECT * FROM Cuti_Khusus WHERE "+category+" LIKE '%"+data+"%'";
         try {
             PreparedStatement preparedStatement=connection.prepareStatement(query);
             ResultSet rs=preparedStatement.executeQuery();
             while(rs.next()){
                 CutiKhusus cutiKhusus = new CutiKhusus();
-                cutiKhusus.setCutiKhususId(rs.getString("cuti_khusus_id"));
-                cutiKhusus.setKeteranganCuti(rs.getString("keterangan_cuti"));
-                cutiKhusus.setLamaCuti(rs.getInt("lama_cuti"));
+                cutiKhusus.setCutiKhususId(rs.getString("id_cuti_khusus"));
+                cutiKhusus.setNamaCuti(rs.getString("nama_cuti"));
                 datas.add(cutiKhusus);
             }
         } catch (SQLException ex) {
@@ -180,14 +175,13 @@ public class CutiKhususDAO implements CutiKhususInterfaceDAO {
     @Override
     public CutiKhusus getById(String id) {
         CutiKhusus cutiKhusus = new CutiKhusus();
-        String query="SELECT * FROM CutiKhusus WHERE cuti_khusus_id="+id;
+        String query="SELECT * FROM Cuti_Khusus WHERE id_cuti_khusus="+id;
         try {
             PreparedStatement preparedStatement=connection.prepareStatement(query);
             ResultSet rs=preparedStatement.executeQuery();
             while(rs.next()){
-                cutiKhusus.setCutiKhususId(rs.getString("cuti_khusus_id"));
-                cutiKhusus.setKeteranganCuti(rs.getString("keterangan_cuti"));
-                cutiKhusus.setLamaCuti(rs.getInt("lama_cuti"));
+                cutiKhusus.setCutiKhususId(rs.getString("id_cuti_khusus"));
+                cutiKhusus.setNamaCuti(rs.getString("nama_cuti"));
             }
         } catch (SQLException ex) {
             Logger.getLogger(CutiKhususDAO.class.getName()).log(Level.SEVERE, null, ex);

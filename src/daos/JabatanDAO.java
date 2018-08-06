@@ -32,11 +32,11 @@ public class JabatanDAO implements JabatanInterfaceDAO{
 
     @Override
     public boolean update(Jabatan jabatan) {
-        String query ="UPDATE JABATAN SET nama_jabatan=? WHERE jabatan_id=?";
+        String query ="UPDATE Jabatan SET nama_jabatan=? WHERE jabatan_id=?";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(1, jabatan.getJabatanId());
-            preparedStatement.setString(2, jabatan.getNamaJabatan());
+            preparedStatement.setString(2, jabatan.getJabatanId());
+            preparedStatement.setString(1, jabatan.getNamaJabatan());
             preparedStatement.executeUpdate();
             return true;
         } catch (SQLException e) {
@@ -48,7 +48,7 @@ public class JabatanDAO implements JabatanInterfaceDAO{
     @Override
     public boolean insert(Jabatan jabatan) {
         boolean flag = false;
-        String query = "INSERT INTO JABATAN VALUES (?, ?)";
+        String query = "INSERT INTO Jabatan VALUES (?, ?)";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, jabatan.getJabatanId());
@@ -63,7 +63,7 @@ public class JabatanDAO implements JabatanInterfaceDAO{
 
     @Override
     public boolean delete(String id) {
-        String query ="DELETE FROM JABATAN WHERE jabatan_id=?";
+        String query ="DELETE FROM Jabatan WHERE jabatan_id=?";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, id);
@@ -78,14 +78,14 @@ public class JabatanDAO implements JabatanInterfaceDAO{
     @Override
     public List<Jabatan> getAll() {
         List<Jabatan> datas = new ArrayList<>();
-        String query = "SELECT * FROM JABATAN";
+        String query = "SELECT * FROM Jabatan";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             ResultSet rs = preparedStatement.executeQuery();
             while(rs.next()){
                 Jabatan jabatan = new Jabatan();
-                jabatan.setJabatanId(rs.getString(1));
-                jabatan.setNamaJabatan(rs.getString(2));
+                jabatan.setJabatanId(rs.getString("jabatan_id"));
+                jabatan.setNamaJabatan(rs.getString("nama_jabatan"));
                 datas.add(jabatan);
             }
         } catch (SQLException e) {
@@ -97,14 +97,14 @@ public class JabatanDAO implements JabatanInterfaceDAO{
     @Override
     public List<Jabatan> getAllSort(String category, String sort) {
         List<Jabatan> datas = new ArrayList<>();
-        String query = "SELECT * FROM JABATAN ORDER BY " +category+ " " +sort;
+        String query = "SELECT * FROM Jabatan ORDER BY " +category+ " " +sort;
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             ResultSet rs = preparedStatement.executeQuery();
             while(rs.next()){
                 Jabatan jabatan = new Jabatan();
-                jabatan.setJabatanId(rs.getString(1));
-                jabatan.setNamaJabatan(rs.getString(2));
+                jabatan.setJabatanId(rs.getString("jabatan_id"));
+                jabatan.setNamaJabatan(rs.getString("nama_jabatan"));
                 datas.add(jabatan);
             }
         } catch (SQLException e) {
@@ -116,7 +116,7 @@ public class JabatanDAO implements JabatanInterfaceDAO{
     @Override
     public List<Jabatan> search(String category, String data) {
         List<Jabatan> datas = new ArrayList<>();
-        String query = "SELECT * FROM JABATAN WHERE " +category+ " LIKE '%" +data+ "%'";
+        String query = "SELECT * FROM Jabatan WHERE " +category+ " LIKE '%" +data+ "%'";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             ResultSet rs = preparedStatement.executeQuery();
@@ -135,7 +135,7 @@ public class JabatanDAO implements JabatanInterfaceDAO{
     @Override
     public Jabatan getById(String id) {
         Jabatan jabatan = new Jabatan();
-        String query = "SELECT * FROM JABATAN WHERE JABATAN_ID = '"+id+"'";
+        String query = "SELECT * FROM Jabatan WHERE JABATAN_ID = '" +id+ "'";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             ResultSet rs = preparedStatement.executeQuery();

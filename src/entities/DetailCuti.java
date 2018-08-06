@@ -15,24 +15,18 @@ public class DetailCuti {
     private String detailCutiId;
     private String karyawanId;
     private String cutiId;
-    private String cutiKhususId;
-    private Date tanggalAwal;
-    private Date tanggalAkhir;
-    private String alasanCuti;
     private String statusCuti;
+    private String lamaCuti;
 
     public DetailCuti() {
     }
 
-    public DetailCuti(String detailCutiId, String karyawanId, String cutiId, String cutiKhusuId, Date tanggalAwal, Date tanggalAkhir, String alasanCuti, String statusCuti) {
+    public DetailCuti(String detailCutiId, String karyawanId, String cutiId, String statusCuti, String lamaCuti) {
         this.detailCutiId = detailCutiId;
         this.karyawanId = karyawanId;
         this.cutiId = cutiId;
-        this.cutiKhususId = cutiKhusuId;
-        this.tanggalAwal = tanggalAwal;
-        this.tanggalAkhir = tanggalAkhir;
-        this.alasanCuti = alasanCuti;
         this.statusCuti = statusCuti;
+        this.lamaCuti = lamaCuti;
     }
 
     public String getDetailCutiId() {
@@ -59,43 +53,19 @@ public class DetailCuti {
         this.cutiId = cutiId;
     }
 
-    public String getCutiKhususId() {
-        return cutiKhususId;
-    }
-
-    public void setCutiKhususId(String cutiKhususId) {
-        this.cutiKhususId = cutiKhususId;
-    }
-
-    public Date getTanggalAwal() {
-        return tanggalAwal;
-    }
-
-    public void setTanggalAwal(Date tanggalAwal) {
-        this.tanggalAwal = tanggalAwal;
-    }
-
-    public Date getTanggalAkhir() {
-        return tanggalAkhir;
-    }
-
-    public void setTanggalAkhir(Date tanggalAkhir) {
-        this.tanggalAkhir = tanggalAkhir;
-    }
-
-    public String getAlasanCuti() {
-        return alasanCuti;
-    }
-
-    public void setAlasanCuti(String alasanCuti) {
-        this.alasanCuti = alasanCuti;
-    }
-
     public String getStatusCuti() {
         return statusCuti;
     }
 
     public void setStatusCuti(String statusCuti) {
         this.statusCuti = statusCuti;
+    }
+    
+    public String getLamaCuti() {
+        return lamaCuti;
+    }
+
+    public void setLamaCuti(String lamaCuti) {
+        this.lamaCuti = lamaCuti;
     }
 }

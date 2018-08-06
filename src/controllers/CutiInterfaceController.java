@@ -6,6 +6,7 @@
 package controllers;
 
 import entities.Cuti;
+import java.sql.Date;
 import java.util.List;
 
 /**
@@ -13,8 +14,8 @@ import java.util.List;
  * @author Simbok_pc
  */
 public interface CutiInterfaceController {
-    public boolean save (String cutiId, String lamaCuti, String sisaTahunIni, String sisaTahunLalu);
-    public boolean edit (String cutiId, String lamaCuti, String sisaTahunIni, String sisaTahunLalu);
+    public boolean save (String cutiId, Date tanggalAwal, Date tanggalAkhir, String keterangan, String idCutiKhusus);
+    public boolean edit (String cutiId, Date tanggalAwal, Date tanggalAkhir, String keterangan, String idCutiKhusus);
     public boolean drop (String id);
     public List<Cuti> binding();
     public List<Cuti> bindingSort(String category, String sort);

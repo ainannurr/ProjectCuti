@@ -8,7 +8,6 @@ package controllers;
 import daos.DetailCutiDAO;
 import entities.DetailCuti;
 import java.sql.Connection;
-import java.sql.Date;
 import java.util.List;
 
 /**
@@ -28,13 +27,13 @@ public class DetailCutiController implements DetailCutiInterfaceController{
     }
 
     @Override
-    public boolean save(String detailCutiId, String karyawanId, String cutiId, String cutiKhususId, String tanggalAwal, String tanggalAkhir, String alasanCuti, String statusCuti) {
-        return this.detaiilCutiDAO.insert(new DetailCuti(detailCutiId, karyawanId, cutiId, cutiKhususId, java.sql.Date.valueOf(tanggalAwal), java.sql.Date.valueOf(tanggalAkhir), alasanCuti, statusCuti));
+    public boolean save(String detailCutiId, String karyawanId, String cutiId, String statusCuti, String lamaCuti) {
+        return this.detaiilCutiDAO.insert(new DetailCuti(detailCutiId, karyawanId, cutiId, statusCuti, lamaCuti));
     }
 
     @Override
-    public boolean edit(String detailCutiId, String karyawanId, String cutiId, String cutiKhususId, String tanggalAwal, String tanggalAkhir, String alasanCuti, String statusCuti) {
-        return this.detaiilCutiDAO.update(new DetailCuti(detailCutiId, karyawanId, cutiId, cutiKhususId, java.sql.Date.valueOf(tanggalAwal), java.sql.Date.valueOf(tanggalAkhir), alasanCuti, statusCuti));
+    public boolean edit(String detailCutiId, String karyawanId, String cutiId, String statusCuti, String lamaCuti) {
+        return this.detaiilCutiDAO.update(new DetailCuti(detailCutiId, karyawanId, cutiId, statusCuti, lamaCuti));
     }
 
     @Override

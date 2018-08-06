@@ -8,6 +8,7 @@ package controllers;
 import daos.CutiDAO;
 import entities.Cuti;
 import java.sql.Connection;
+import java.sql.Date;
 import java.util.List;
 
 /**
@@ -25,13 +26,13 @@ public class CutiController implements CutiInterfaceController{
     }
 
     @Override
-    public boolean save(String cutiId, String lamaCuti, String sisaTahunIni, String sisaTahunLalu) {
-        return this.cutiDAO.insert(new Cuti(cutiId, Integer.parseInt(lamaCuti), Integer.parseInt(sisaTahunIni), Integer.parseInt(sisaTahunLalu)));
+    public boolean save(String cutiId, Date tanggalAwal, Date tanggalAkhir, String keterangan, String idCutiKhusus) {
+        return this.cutiDAO.insert(new Cuti(cutiId, tanggalAwal, tanggalAkhir, keterangan, idCutiKhusus));
     }
 
     @Override
-    public boolean edit(String cutiId, String lamaCuti, String sisaTahunIni, String sisaTahunLalu) {
-        return this.cutiDAO.update(new Cuti(cutiId, Integer.parseInt(lamaCuti), Integer.parseInt(sisaTahunIni), Integer.parseInt(sisaTahunLalu)));
+    public boolean edit(String cutiId, Date tanggalAwal, Date tanggalAkhir, String keterangan, String idCutiKhusus) {
+        return this.cutiDAO.update(new Cuti(cutiId, tanggalAwal, tanggalAkhir, keterangan, idCutiKhusus));
     }
 
     @Override

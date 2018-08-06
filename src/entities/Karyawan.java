@@ -7,77 +7,73 @@ package entities;
 
 /**
  *
- * @author Simbok_pc
+ * @author AINAN-Gaul
  */
 public class Karyawan {
     private String karyawanId;
     private String namaKaryawan;
     private String email;
+    private String alamat;
+    private int jatahCuti;
     private String jabatanId;
 
     public Karyawan() {
     }
 
-    public Karyawan(String karyawanId, String namaKaryawan, String email, String jabatanId) {
+    public Karyawan(String karyawanId, String namaKaryawan, String email, String alamat, String jabatanId, int jatahCuti) {
         this.karyawanId = karyawanId;
         this.namaKaryawan = namaKaryawan;
         this.email = email;
+        this.alamat = alamat;
         this.jabatanId = jabatanId;
+        this.jatahCuti = jatahCuti;
     }
 
-    /**
-     * @return the karyawanId
-     */
     public String getKaryawanId() {
         return karyawanId;
     }
 
-    /**
-     * @param karyawanId the karyawanId to set
-     */
     public void setKaryawanId(String karyawanId) {
         this.karyawanId = karyawanId;
     }
 
-    /**
-     * @return the namaKaryawan
-     */
     public String getNamaKaryawan() {
         return namaKaryawan;
     }
 
-    /**
-     * @param namaKaryawan the namaKaryawan to set
-     */
     public void setNamaKaryawan(String namaKaryawan) {
         this.namaKaryawan = namaKaryawan;
     }
 
-    /**
-     * @return the email
-     */
     public String getEmail() {
         return email;
     }
 
-    /**
-     * @param email the email to set
-     */
     public void setEmail(String email) {
         this.email = email;
     }
 
-    /**
-     * @return the jabatanId
-     */
+    public String getAlamat() {
+        return alamat;
+    }
+
+    public void setAlamat(String alamat) {
+        this.alamat = alamat;
+    }
+
     public String getJabatanId() {
         return jabatanId;
     }
 
-    /**
-     * @param jabatanId the jabatanId to set
-     */
     public void setJabatanId(String jabatanId) {
         this.jabatanId = jabatanId;
+    }
+
+    public int getJatahCuti() {
+        return jatahCuti;
+    }
+
+    public void setJatahCuti(int jatahCuti) {
+        this.jatahCuti = jatahCuti;
     }
 }

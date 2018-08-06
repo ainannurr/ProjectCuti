@@ -21,6 +21,8 @@ import java.util.logging.Logger;
  */
 public class CutiDAO implements CutiInterfaceDAO{
     private Connection connection;
+    private String tanggalAwal;
+    private String tanggalAkhir;
     
     public CutiDAO(){
     }
@@ -41,13 +43,14 @@ public class CutiDAO implements CutiInterfaceDAO{
     @Override
     public boolean insert(Cuti cuti) {
         boolean flag = false;
-        String query = "INSERT INTO Cuti VALUES(?,?,?,?)";    
+        String query = "INSERT INTO Cuti VALUES(?,?,?,?,?)";    
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, cuti.getCutiId());
-            preparedStatement.setInt(2, cuti.getLamaCuti());
-            preparedStatement.setInt(3, cuti.getSisaTahunIni());
-            preparedStatement.setInt(4, cuti.getSisaTahunLalu());
+            preparedStatement.setDate(2, java.sql.Date.valueOf(tanggalAwal));
+            preparedStatement.setDate(3, java.sql.Date.valueOf(tanggalAkhir));
+            preparedStatement.setString(4, cuti.getKeterangan());
+            preparedStatement.setString(5, cuti.getIdCutiKhusus());
             preparedStatement.executeUpdate();
             flag = true;
         } catch (SQLException ex) {
@@ -63,13 +66,14 @@ public class CutiDAO implements CutiInterfaceDAO{
      */
     @Override
     public boolean update(Cuti cuti) {
-        String query = "UPDATE Departments SET lama_cuti=?, sisa_tahun_ini=?, sisa_tahun_lalu=? WHERE cuti_id=?";
+        String query = "UPDATE Cuti SET tanggal_awal=?, tanggal_akhir=?, keterangan=?, id_cuti_khusus=? WHERE id_cuti=?";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setInt(1, cuti.getLamaCuti());
-            preparedStatement.setInt(2, cuti.getSisaTahunIni());
-            preparedStatement.setInt(3, cuti.getSisaTahunLalu());
-            preparedStatement.setString(4, cuti.getCutiId());
+            preparedStatement.setDate(1, java.sql.Date.valueOf(tanggalAwal));
+            preparedStatement.setDate(2, java.sql.Date.valueOf(tanggalAkhir));
+            preparedStatement.setString(3, cuti.getKeterangan());
+            preparedStatement.setString(4, cuti.getIdCutiKhusus());
+            preparedStatement.setString(5, cuti.getCutiId());
             preparedStatement.executeUpdate();
             return true;
         } catch (SQLException ex) {
@@ -85,7 +89,7 @@ public class CutiDAO implements CutiInterfaceDAO{
      */
     @Override
     public boolean delete(String id) {
-        String query = "DELETE FROM Cuti WHERE cuti_id=?";
+        String query = "DELETE FROM Cuti WHERE id_cuti=?";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, id);
@@ -111,9 +115,10 @@ public class CutiDAO implements CutiInterfaceDAO{
             while(rs.next()){
                 Cuti cuti=new Cuti();
                 cuti.setCutiId(rs.getString("id_cuti"));
-                cuti.setLamaCuti(rs.getInt("lama_cuti"));
-                cuti.setSisaTahunIni(rs.getInt("sisa_tahunini"));
-                cuti.setSisaTahunLalu(rs.getInt("sisa_tahunlalu"));
+                cuti.setTanggal_awal(rs.getDate("tanggal_awal"));
+                cuti.setTanggal_akhir(rs.getDate("tanggal_akhir"));
+                cuti.setKeterangan(rs.getString("keterangan"));
+                cuti.setIdCutiKhusus(rs.getString("id_cuti_khusus"));
                 datas.add(cuti);
             }
         } catch (SQLException ex) {
@@ -138,9 +143,10 @@ public class CutiDAO implements CutiInterfaceDAO{
             while(rs.next()){
                 Cuti cuti = new Cuti();
                 cuti.setCutiId(rs.getString("id_cuti"));
-                cuti.setLamaCuti(rs.getInt("lama_cuti"));
-                cuti.setSisaTahunIni(rs.getInt("sisa_tahunini"));
-                cuti.setSisaTahunLalu(rs.getInt("sisa_tahunlalu"));
+                cuti.setTanggal_awal(rs.getDate("tanggal_awal"));
+                cuti.setTanggal_akhir(rs.getDate("tanggal_akhir"));
+                cuti.setKeterangan(rs.getString("keterangan"));
+                cuti.setIdCutiKhusus(rs.getString("id_cuti_khusus"));
                 datas.add(cuti);
             }
         } catch (SQLException ex) {
@@ -164,10 +170,11 @@ public class CutiDAO implements CutiInterfaceDAO{
             ResultSet rs=preparedStatement.executeQuery();
             while(rs.next()){
                 Cuti cuti = new Cuti();
-                cuti.setCutiId(rs.getString("cuti_id"));
-                cuti.setLamaCuti(rs.getInt("lama_cuti"));
-                cuti.setSisaTahunIni(rs.getInt("lama_cuti"));
-                cuti.setLamaCuti(rs.getInt("lama_cuti"));
+                cuti.setCutiId(rs.getString("id_cuti"));
+                cuti.setTanggal_awal(rs.getDate("tanggal_awal"));
+                cuti.setTanggal_akhir(rs.getDate("tanggal_akhir"));
+                cuti.setKeterangan(rs.getString("keterangan"));
+                cuti.setIdCutiKhusus(rs.getString("id_cuti_khusus"));
                 datas.add(cuti);
             }
         } catch (SQLException ex) {
@@ -184,15 +191,16 @@ public class CutiDAO implements CutiInterfaceDAO{
     @Override
     public Cuti getById(String id) {
         Cuti cuti = new Cuti();
-        String query="SELECT * FROM Cuti WHERE cuti_id="+id;
+        String query="SELECT * FROM Cuti WHERE id_cuti= '" +id+ "'";
         try {
             PreparedStatement preparedStatement=connection.prepareStatement(query);
             ResultSet rs=preparedStatement.executeQuery();
             while(rs.next()){
-                cuti.setCutiId(rs.getString("cuti_id"));
-                cuti.setLamaCuti(rs.getInt("lama_cuti"));
-                cuti.setSisaTahunIni(rs.getInt("sisa_tahun_ini"));
-                cuti.setSisaTahunLalu(rs.getInt("sisa_tahun_lalu"));
+                cuti.setCutiId(rs.getString("id_cuti"));
+                cuti.setTanggal_awal(rs.getDate("tanggal_awal"));
+                cuti.setTanggal_akhir(rs.getDate("tanggal_akhir"));
+                cuti.setKeterangan(rs.getString("keterangan"));
+                cuti.setIdCutiKhusus(rs.getString("id_cuti_khusus"));
             }
         } catch (SQLException ex) {
             Logger.getLogger(CutiDAO.class.getName()).log(Level.SEVERE, null, ex);

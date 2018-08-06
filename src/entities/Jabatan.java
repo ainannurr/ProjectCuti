@@ -7,10 +7,10 @@ package entities;
 
 /**
  *
- * @author Simbok_pc
+ * @author AINAN-Gaul
  */
 public class Jabatan {
-     private String jabatanId;
+    private String jabatanId;
     private String namaJabatan;
 
     public Jabatan() {
@@ -47,6 +47,5 @@ public class Jabatan {
      */
     public void setNamaJabatan(String namaJabatan) {
         this.namaJabatan = namaJabatan;
-    }
-    
+    } 
 }

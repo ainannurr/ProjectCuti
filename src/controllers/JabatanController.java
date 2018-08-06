@@ -58,5 +58,4 @@ public class JabatanController implements JabatanInterfaceController{
     public Jabatan findById(String id) {
         return this.jabatanDAO.getById(id);
     }
-    
 }

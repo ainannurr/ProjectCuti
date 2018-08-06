@@ -18,7 +18,7 @@ import tools.MyConnection;
 public class CutiView extends javax.swing.JInternalFrame {
 
     private CutiController cutiController;
-    
+
     /**
      * Creates new form CutiView
      */
@@ -26,6 +26,7 @@ public class CutiView extends javax.swing.JInternalFrame {
         initComponents();
         this.cutiController = new CutiController(new MyConnection().getConnection());
         bindingTable();
+        reset();
     }
 
     /**
@@ -45,12 +46,14 @@ public class CutiView extends javax.swing.JInternalFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         txtCutiID = new javax.swing.JTextField();
-        txtLamaCuti = new javax.swing.JTextField();
-        txtSisaThnIni = new javax.swing.JTextField();
-        txtSisaThnLalu = new javax.swing.JTextField();
+        txtTglAwal = new javax.swing.JTextField();
+        txtTglAkhir = new javax.swing.JTextField();
+        txtKet = new javax.swing.JTextField();
         btnSave = new javax.swing.JButton();
         btnEdit = new javax.swing.JButton();
         btnDrop = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
+        cmbCutiKhususID = new javax.swing.JComboBox<>();
 
         setClosable(true);
         setIconifiable(true);
@@ -80,11 +83,11 @@ public class CutiView extends javax.swing.JInternalFrame {
 
         jLabel1.setText("Cuti ID");
 
-        jLabel2.setText("Lama Cuti");
+        jLabel2.setText("Tanggal Awal");
 
-        jLabel3.setText("Sisa Tahun Ini");
+        jLabel3.setText("Tanggal Akhir");
 
-        jLabel4.setText("Sisa Tahun Lalu");
+        jLabel4.setText("Keterangan");
 
         txtCutiID.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -113,6 +116,8 @@ public class CutiView extends javax.swing.JInternalFrame {
             }
         });
 
+        jLabel5.setText("Cuti Khusus ID");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -126,19 +131,27 @@ public class CutiView extends javax.swing.JInternalFrame {
                             .addComponent(jLabel2)
                             .addComponent(jLabel3)
                             .addComponent(jLabel4))
-                        .addGap(15, 15, 15)
+                        .addGap(24, 24, 24)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtCutiID)
-                            .addComponent(txtLamaCuti)
-                            .addComponent(txtSisaThnIni)
-                            .addComponent(txtSisaThnLalu)))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtCutiID, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtTglAwal, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtTglAkhir, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(txtKet)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGap(0, 369, Short.MAX_VALUE)
                         .addComponent(btnDrop)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnEdit)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnSave)))
+                        .addComponent(btnSave))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel5)
+                        .addGap(18, 18, 18)
+                        .addComponent(cmbCutiKhususID, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -151,21 +164,24 @@ public class CutiView extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(txtLamaCuti, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtTglAwal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(txtSisaThnIni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtTglAkhir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel4)
-                    .addComponent(txtSisaThnLalu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnSave)
+                    .addComponent(jLabel4)
+                    .addComponent(txtKet, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(14, 14, 14)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(cmbCutiKhususID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnDrop)
                     .addComponent(btnEdit)
-                    .addComponent(btnDrop))
-                .addContainerGap(22, Short.MAX_VALUE))
+                    .addComponent(btnSave)))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -183,7 +199,7 @@ public class CutiView extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 179, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -197,28 +213,27 @@ public class CutiView extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtCutiIDActionPerformed
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
-        boolean flag = this.cutiController.save(txtCutiID.getText(), txtLamaCuti.getText(), 
-                txtSisaThnIni.getText(), txtSisaThnLalu.getText());
+        boolean flag = this.cutiController.save(txtCutiID.getText(), (txtTglAwal.getText()), (txtTglAkhir.getText()),
+                txtKet.getText(), cmbCutiKhususID.getSelectedIndex());
         String message = "Failed to save data...";
-        if (flag){
+        if (flag) {
             message = "Success to save data...";
         }
-        JOptionPane.showMessageDialog(this, message, "Allert / Notification", 
+        JOptionPane.showMessageDialog(this, message, "Allert / Notification",
                 JOptionPane.INFORMATION_MESSAGE);
-        
+
         bindingTable();
         reset();
     }//GEN-LAST:event_btnSaveActionPerformed
 
     private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
-        boolean flag = this.cutiController.edit(txtCutiID.getText(), txtLamaCuti.getText(), 
-                txtSisaThnIni.getText(), txtSisaThnLalu.getText());
-        String message = "Failed to edit data...";
-        if (flag){
-            message = "Success to edit data...";
+        boolean flag = this.cutiController.save(txtCutiID.getText(), (txtTglAwal.getText()), (txtTglAkhir.getText()),
+                txtKet.getText(), cmbCutiKhususID.getSelectedIndex());
+        String message = "Failed to edit data";
+        if (flag) {
+            message = "Success to edit data";
         }
-        JOptionPane.showMessageDialog(this, message, "Notification", 
-                JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(this, message, "Notification", JOptionPane.INFORMATION_MESSAGE);
         bindingTable();
         reset();
     }//GEN-LAST:event_btnEditActionPerformed
@@ -226,20 +241,21 @@ public class CutiView extends javax.swing.JInternalFrame {
     private void tblCutiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblCutiMouseClicked
         int row = tblCuti.getSelectedRow();
         txtCutiID.setText(tblCuti.getValueAt(row, 0).toString());
-        txtLamaCuti.setText(tblCuti.getValueAt(row, 1).toString());
-        txtSisaThnIni.setText(tblCuti.getValueAt(row, 2).toString());
-        txtSisaThnLalu.setText(tblCuti.getValueAt(row, 3).toString());
+        txtTglAwal.setText(tblCuti.getValueAt(row, 1).toString());
+        txtTglAkhir.setText(tblCuti.getValueAt(row, 2).toString());
+        txtKet.setText(tblCuti.getValueAt(row, 3).toString());
+        cmbCutiKhususID.setSelectedItem(tblCuti.getValueAt(row, 4).toString());
     }//GEN-LAST:event_tblCutiMouseClicked
 
     private void btnDropActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDropActionPerformed
         String message = "Failed to edit data...";
-        int flag = JOptionPane.showConfirmDialog(this, "Tenane?", "APA KOE YAKIN MEH NGEHAPUS?", 
+        int flag = JOptionPane.showConfirmDialog(this, "Tenane?", "APA KOE YAKIN MEH NGEHAPUS?",
                 JOptionPane.YES_NO_OPTION);
-        if (flag == 0){
-            if (cutiController.drop(txtCutiID.getText())){
+        if (flag == 0) {
+            if (cutiController.drop(txtCutiID.getText())) {
                 message = "Success to drop data...";
             }
-            JOptionPane.showMessageDialog(this, message, "Notification", 
+            JOptionPane.showMessageDialog(this, message, "Notification",
                     JOptionPane.QUESTION_MESSAGE);
         }
         bindingTable();
@@ -251,37 +267,39 @@ public class CutiView extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnDrop;
     private javax.swing.JButton btnEdit;
     private javax.swing.JButton btnSave;
+    private javax.swing.JComboBox<String> cmbCutiKhususID;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblCuti;
     private javax.swing.JTextField txtCutiID;
-    private javax.swing.JTextField txtLamaCuti;
-    private javax.swing.JTextField txtSisaThnIni;
-    private javax.swing.JTextField txtSisaThnLalu;
+    private javax.swing.JTextField txtKet;
+    private javax.swing.JTextField txtTglAkhir;
+    private javax.swing.JTextField txtTglAwal;
     // End of variables declaration//GEN-END:variables
 
-public void bindingTable(){
-    String[] header = {"Cuti ID","Lama Cuti","Sisa Tahun Ini", "Sisa Tahun Lalu"};
-    DefaultTableModel defaultTableModel = new DefaultTableModel(header, 0);
-    for (Cuti cuti : cutiController.binding()) {
-        Object[] cuti1 = {
-            cuti.getCutiId(),cuti.getLamaCuti(),cuti.getSisaTahunIni(),
-            cuti.getSisaTahunLalu()
-        };
-        defaultTableModel.addRow(cuti1);
+    public void bindingTable() {
+        String[] header = {"Cuti ID", "Tanggal Awal", "Tanggal Akhir", "Keterangan", "Cuti Khusus ID"};
+        DefaultTableModel defaultTableModel = new DefaultTableModel(header, 0);
+        for (Cuti cuti : cutiController.binding()) {
+            Object[] cuti1 = {
+                cuti.getCutiId(), cuti.getTanggal_awal(), cuti.getTanggal_akhir(), cuti.getKeterangan(), cuti.getIdCutiKhusus()
+            };
+            defaultTableModel.addRow(cuti1);
+        }
+        tblCuti.setModel(defaultTableModel);
     }
-    tblCuti.setModel(defaultTableModel);
-}
 
-public void reset(){
-    txtCutiID.setText("");
-    txtLamaCuti.setText("");
-    txtSisaThnIni.setText("");
-    txtSisaThnLalu.setText("");
-}  
+    public void reset() {
+        txtCutiID.setText("");
+        txtTglAwal.setText("");
+        txtTglAkhir.setText("");
+        txtKet.setText("");
+        cmbCutiKhususID.setSelectedItem("");
+    }
 
 }

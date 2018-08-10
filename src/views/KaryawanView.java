@@ -252,6 +252,10 @@ public class KaryawanView extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * fungsi yang digunakan untuk menyimpan data ketika menekan tombol save
+     * @param evt 
+     */
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         boolean flag = this.karyawanController.save(inputKaryawanId.getText(), Integer.toString(cmbJabatan.getSelectedIndex()), inputNamaKaryawan.getText(), inputEmail.getText(), inputAlamat.getText(), Integer.parseInt(inputJatah.getText()));
         String messege = "Failed to save data!";
@@ -263,6 +267,10 @@ public class KaryawanView extends javax.swing.JInternalFrame {
         reset();
     }//GEN-LAST:event_btnSaveActionPerformed
 
+    /**
+     * fungsi yang digunakan untuk menyimpan data ketika menekan tombol edit
+     * @param evt 
+     */
     private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
         String messege = "Failed to edit data.";
         if (karyawanController.edit(inputKaryawanId.getText(), Integer.toString(cmbJabatan.getSelectedIndex()), inputNamaKaryawan.getText(), inputEmail.getText(), inputAlamat.getText(), Integer.parseInt(inputJatah.getText()))) {
@@ -273,6 +281,10 @@ public class KaryawanView extends javax.swing.JInternalFrame {
         reset();
     }//GEN-LAST:event_btnEditActionPerformed
 
+    /**
+     * fungsi yang digunakan untuk menghapus data ketika menekan tombol drop
+     * @param evt 
+     */
     private void btnDropActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDropActionPerformed
         String messege = "Failed to delete data.";
         int flag = JOptionPane.showConfirmDialog(this, "Are you sure want to delete?", "Alert", JOptionPane.YES_NO_OPTION);
@@ -286,12 +298,20 @@ public class KaryawanView extends javax.swing.JInternalFrame {
         reset();
     }//GEN-LAST:event_btnDropActionPerformed
 
+    /**
+     * funsgi yang digunakan untuk mencari data ketika menekan tombol find
+     * @param evt 
+     */
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
         String category = cmbCategoryKaryawan.getSelectedItem().toString();
         String data = inputSearch.getText();
         searchTable(category, data);
     }//GEN-LAST:event_btnSearchActionPerformed
 
+    /**
+     * fungsi yang digunakan untuk menampilkan data ke text filed ketika memilih data
+     * @param evt 
+     */
     private void tblKaryawanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblKaryawanMouseClicked
         int row = tblKaryawan.getSelectedRow();
         inputKaryawanId.setText(tblKaryawan.getValueAt(row, 0).toString());
@@ -336,6 +356,9 @@ public class KaryawanView extends javax.swing.JInternalFrame {
     private javax.swing.JTable tblKaryawan;
     // End of variables declaration//GEN-END:variables
 
+    /**
+     * fungsi yang digunakan untuk menampilkan tabel data cuti khusus
+     */
     public void bindingTable() {
         String[] header = {"ID Karyawan", "Nama Karyawan", "Email", "Alamat", "Jatah Cuti", "Jabatan"};
         DefaultTableModel defaultTableModel = new DefaultTableModel(header, 0);
@@ -349,6 +372,11 @@ public class KaryawanView extends javax.swing.JInternalFrame {
         tblKaryawan.setModel(defaultTableModel);
     }
 
+    /**
+     * fungsi yang digunakan untuk mencari data karyawan
+     * @param category String
+     * @param data String
+     */
     public void searchTable(String category, String data) {
         String[] header = {"ID Karyawan", "Nama Karyawan", "Email", "Alamat", "Jatah Cuti", "Jabatan"};
         DefaultTableModel defaultTableModel = new DefaultTableModel(header, 0);
@@ -361,13 +389,6 @@ public class KaryawanView extends javax.swing.JInternalFrame {
         }
         tblKaryawan.setModel(defaultTableModel);
     }
-    
-    public void loadJabatanComboBox(JComboBox comboBox,String[] header){
-        comboBox.removeAllItems();
-        for (String string : header) {
-            comboBox.addItem(string);
-        }
-    }
 
 //    public void tampilJabatanCmb(){
 //        for (Jabatan jabatan : jabatanController.find(category, data)) {
@@ -379,7 +400,9 @@ public class KaryawanView extends javax.swing.JInternalFrame {
 //        this.loadJabatanComboBox(cmbJabatan, );
 //    }
     
-    
+    /**
+     * fungsi yang digunakan untuk membersihkan data ketika menyimpan atau menghapus data
+     */
     public void reset() {
         inputKaryawanId.setText("");
         inputNamaKaryawan.setText("");
@@ -388,22 +411,15 @@ public class KaryawanView extends javax.swing.JInternalFrame {
         inputJatah.setText("");
     }
 
+    /**
+     * fungsi yang digunakan untuk menampilkan id jabatan di combobox
+     */
     public void comboJabatan() {
         String jabatan1 = "";
         for (Jabatan jabatan : jabatanController.bindingSort("jabatan_id", "asc")) {
             jabatan1 = jabatan.getJabatanId();
         }
         cmbJabatan.setSelectedItem(jabatan1);
-    }
-
-    public String getIdfromComboBox(List<Jabatan> datas, int index) {
-        return datas.get(index).toString();
-    }
-
-    public void loadDetails(List<Jabatan> datas, int index) {
-        for (Jabatan data : datas) {
-            cmbJabatan.addItem(data.getJabatanId());
-        }
     }
 
 //    public void loadRegion() {

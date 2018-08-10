@@ -28,7 +28,7 @@ public class CutiKhususDAO implements CutiKhususInterfaceDAO {
     
     /**
      * fungsi untuk memanggil koneksi
-     * @param connection 
+     * @param connection Connection
      */
     public CutiKhususDAO(Connection connection) {
         this.connection = connection;
@@ -36,7 +36,7 @@ public class CutiKhususDAO implements CutiKhususInterfaceDAO {
 
     /**
      * fungsi ini digunakan untuk insert data pada tabel CutiKhusus
-     * @param cutiKhusus
+     * @param cutiKhusus Object
      * @return true / false
      */
     @Override
@@ -57,12 +57,12 @@ public class CutiKhususDAO implements CutiKhususInterfaceDAO {
 
     /**
      * fungsi ini digunakan mengedit data pada tabel CutiKhusus
-     * @param cutiKhusus
+     * @param cutiKhusus Object
      * @return true / false
      */
     @Override
     public boolean update(CutiKhusus cutiKhusus) {
-        String query = "UPDATE Cuti_Khusus SET nama_cuti=? WHERE id_cuti_khusus=?";    
+        String query = "UPDATE Cuti_Khusus SET nama_cuti=? WHERE ck_id=?";    
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, cutiKhusus.getNamaCuti());
@@ -82,7 +82,7 @@ public class CutiKhususDAO implements CutiKhususInterfaceDAO {
      */
     @Override
     public boolean delete(String id) {
-        String query = "DELETE FROM Cuti_Khusus WHERE id_cuti_khusus=?";
+        String query = "DELETE FROM Cuti_Khusus WHERE ck_id=?";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, id);
@@ -96,7 +96,7 @@ public class CutiKhususDAO implements CutiKhususInterfaceDAO {
 
     /**
      * fungsi ini diguakan untuk menggambil/menampilkan data dari Tabel CutiKhusus
-     * @return 
+     * @return  List
      */
     @Override
     public List<CutiKhusus> getAll() {
@@ -107,7 +107,7 @@ public class CutiKhususDAO implements CutiKhususInterfaceDAO {
             ResultSet rs=preparedStatement.executeQuery();
             while(rs.next()){
                 CutiKhusus cutiKhusus = new CutiKhusus();
-                cutiKhusus.setCutiKhususId(rs.getString("id_cuti_khusus"));
+                cutiKhusus.setCutiKhususId(rs.getString("ck_id"));
                 cutiKhusus.setNamaCuti(rs.getString("nama_cuti"));
                 datas.add(cutiKhusus);
             }
@@ -119,9 +119,9 @@ public class CutiKhususDAO implements CutiKhususInterfaceDAO {
 
     /**
      * fungsi ini digunakan untuk menampilkan data dari tabel CutiKhusus berdasarkan parameter
-     * @param category String --> parameter kategori yang akan dijadikan acuan mengurutkan data
-     * @param sort String --> mengurutkan data berdasarkan asc/desc
-     * @return 
+     * @param category String parameter kategori yang akan dijadikan acuan mengurutkan data
+     * @param sort String mengurutkan data berdasarkan asc/desc
+     * @return List
      */
     @Override
     public List<CutiKhusus> getAllSort(String category, String sort) {
@@ -132,7 +132,7 @@ public class CutiKhususDAO implements CutiKhususInterfaceDAO {
             ResultSet rs=preparedStatement.executeQuery();
             while(rs.next()){
                 CutiKhusus cutiKhusus = new CutiKhusus();
-                cutiKhusus.setCutiKhususId(rs.getString("id_cuti_khusus"));
+                cutiKhusus.setCutiKhususId(rs.getString("ck_id"));
                 cutiKhusus.setNamaCuti(rs.getString("nama_cuti"));
                 datas.add(cutiKhusus);
             }
@@ -145,8 +145,8 @@ public class CutiKhususDAO implements CutiKhususInterfaceDAO {
     /**
      * fungsi ini digunakan mencari data dari tabel CutiKhusus dengan parameter tertentu
      * @param category parameter katgori yang akan dicari
-     * @param data String --> parameter kata kunci
-     * @return 
+     * @param data String parameter kata kunci
+     * @return List
      */
     @Override
     public List<CutiKhusus> search(String category, String data) {
@@ -157,7 +157,7 @@ public class CutiKhususDAO implements CutiKhususInterfaceDAO {
             ResultSet rs=preparedStatement.executeQuery();
             while(rs.next()){
                 CutiKhusus cutiKhusus = new CutiKhusus();
-                cutiKhusus.setCutiKhususId(rs.getString("id_cuti_khusus"));
+                cutiKhusus.setCutiKhususId(rs.getString("ck_id"));
                 cutiKhusus.setNamaCuti(rs.getString("nama_cuti"));
                 datas.add(cutiKhusus);
             }
@@ -170,17 +170,17 @@ public class CutiKhususDAO implements CutiKhususInterfaceDAO {
     /**
      * fungsi ini digunakan untuk menampilkan data dari tabel CutiKhusus dengan parameter id
      * @param id Integer
-     * @return 
+     * @return ID
      */
     @Override
     public CutiKhusus getById(String id) {
         CutiKhusus cutiKhusus = new CutiKhusus();
-        String query="SELECT * FROM Cuti_Khusus WHERE id_cuti_khusus="+id;
+        String query="SELECT * FROM Cuti_Khusus WHERE ck_id="+id;
         try {
             PreparedStatement preparedStatement=connection.prepareStatement(query);
             ResultSet rs=preparedStatement.executeQuery();
             while(rs.next()){
-                cutiKhusus.setCutiKhususId(rs.getString("id_cuti_khusus"));
+                cutiKhusus.setCutiKhususId(rs.getString("ck_id"));
                 cutiKhusus.setNamaCuti(rs.getString("nama_cuti"));
             }
         } catch (SQLException ex) {

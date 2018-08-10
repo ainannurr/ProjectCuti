@@ -6,32 +6,30 @@
 package tools;
 
 import java.sql.Connection;
-import java.sql.SQLException;
 import oracle.jdbc.pool.OracleDataSource;
 
 /**
  *
- * @author Simbok_pc
+ * @author AINAN-Gaul
  */
 public class MyConnection {
     private Connection connect;
+    
     public Connection getConnection(){
-     try {
+        try {
             OracleDataSource ods = new OracleDataSource();
             ods.setDriverType("thin");
             ods.setServerName("localhost");
             ods.setPortNumber(1521);
             ods.setServiceName("XE");
             ods.setUser("system");
-            ods.setPassword("dina");
+            ods.setPassword("@1n4nnur");
             connect = ods.getConnection();
             connect.createStatement()
-                    .execute("alter session set "
-                            + "current_schema=CUTI");
-        } catch (SQLException e) {
+                    .execute("alter session set current_schema=cuti");
+        } catch (Exception e) {
             System.out.println(e.getMessage());
         }
         return connect;
     }
 }
-

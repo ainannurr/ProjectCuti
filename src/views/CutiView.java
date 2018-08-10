@@ -18,7 +18,7 @@ import tools.MyConnection;
 public class CutiView extends javax.swing.JInternalFrame {
 
     private CutiController cutiController;
-
+    
     /**
      * Creates new form CutiView
      */
@@ -211,33 +211,45 @@ public class CutiView extends javax.swing.JInternalFrame {
     private void txtCutiIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCutiIDActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtCutiIDActionPerformed
-
+    
+    /**
+     * fungsi yang digunakan untuk menyimpan data ketika menekan tombol save
+     * @param evt 
+     */
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         boolean flag = this.cutiController.save(txtCutiID.getText(), (txtTglAwal.getText()), (txtTglAkhir.getText()),
                 txtKet.getText(), cmbCutiKhususID.getSelectedIndex());
         String message = "Failed to save data...";
-        if (flag) {
+        if (flag){
             message = "Success to save data...";
         }
-        JOptionPane.showMessageDialog(this, message, "Allert / Notification",
+        JOptionPane.showMessageDialog(this, message, "Allert / Notification", 
                 JOptionPane.INFORMATION_MESSAGE);
-
+        
         bindingTable();
         reset();
     }//GEN-LAST:event_btnSaveActionPerformed
-
+    
+    /**
+     * fungsi yang digunakan untuk menyimpan data ketika menekan tombol edit
+     * @param evt 
+     */
     private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
         boolean flag = this.cutiController.save(txtCutiID.getText(), (txtTglAwal.getText()), (txtTglAkhir.getText()),
                 txtKet.getText(), cmbCutiKhususID.getSelectedIndex());
         String message = "Failed to edit data";
-        if (flag) {
+        if (flag){
             message = "Success to edit data";
         }
         JOptionPane.showMessageDialog(this, message, "Notification", JOptionPane.INFORMATION_MESSAGE);
         bindingTable();
         reset();
     }//GEN-LAST:event_btnEditActionPerformed
-
+    
+    /**
+     * fungsi yang digunakan untuk menampilkan data ke text filed ketika memilih data
+     * @param evt 
+     */
     private void tblCutiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblCutiMouseClicked
         int row = tblCuti.getSelectedRow();
         txtCutiID.setText(tblCuti.getValueAt(row, 0).toString());
@@ -247,15 +259,19 @@ public class CutiView extends javax.swing.JInternalFrame {
         cmbCutiKhususID.setSelectedItem(tblCuti.getValueAt(row, 4).toString());
     }//GEN-LAST:event_tblCutiMouseClicked
 
+    /**
+     * fungsi yang digunakan untuk menghapus data ketika menekan tombol drop
+     * @param evt 
+     */
     private void btnDropActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDropActionPerformed
         String message = "Failed to edit data...";
-        int flag = JOptionPane.showConfirmDialog(this, "Tenane?", "APA KOE YAKIN MEH NGEHAPUS?",
+        int flag = JOptionPane.showConfirmDialog(this, "Tenane?", "APA KOE YAKIN MEH NGEHAPUS?", 
                 JOptionPane.YES_NO_OPTION);
-        if (flag == 0) {
-            if (cutiController.drop(txtCutiID.getText())) {
+        if (flag == 0){
+            if (cutiController.drop(txtCutiID.getText())){
                 message = "Success to drop data...";
             }
-            JOptionPane.showMessageDialog(this, message, "Notification",
+            JOptionPane.showMessageDialog(this, message, "Notification", 
                     JOptionPane.QUESTION_MESSAGE);
         }
         bindingTable();
@@ -282,18 +298,25 @@ public class CutiView extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtTglAwal;
     // End of variables declaration//GEN-END:variables
 
+    /**
+     * fungsi yang digunakan untuk menampilkan tabel data cuti khusus
+     */
     public void bindingTable() {
         String[] header = {"Cuti ID", "Tanggal Awal", "Tanggal Akhir", "Keterangan", "Cuti Khusus ID"};
         DefaultTableModel defaultTableModel = new DefaultTableModel(header, 0);
         for (Cuti cuti : cutiController.binding()) {
             Object[] cuti1 = {
-                cuti.getCutiId(), cuti.getTanggal_awal(), cuti.getTanggal_akhir(), cuti.getKeterangan(), cuti.getIdCutiKhusus()
+                cuti.getCutiId(), cuti.getCkId(), cuti.getTanggalAwal(), cuti.getTanggalAkhir(), cuti.getKeterangan()
             };
+            this.cmbCutiKhususID.addItem(cuti1[2].toString());
             defaultTableModel.addRow(cuti1);
         }
         tblCuti.setModel(defaultTableModel);
     }
 
+     /**
+     * fungsi yang digunakan untuk membersihkan data ketika menyimpan atau menghapus data
+     */
     public void reset() {
         txtCutiID.setText("");
         txtTglAwal.setText("");
@@ -301,5 +324,4 @@ public class CutiView extends javax.swing.JInternalFrame {
         txtKet.setText("");
         cmbCutiKhususID.setSelectedItem("");
     }
-
 }

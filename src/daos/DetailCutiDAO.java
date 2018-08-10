@@ -26,21 +26,32 @@ public class DetailCutiDAO implements DetailCutiInterfaceDAO{
     public DetailCutiDAO() {
     }
 
+    
+    
+    /**
+     * fungsi untuk memanggil koneksi
+     * @param connection Connection
+     */
     public DetailCutiDAO(Connection connection) {
         this.connection = connection;
     }
 
+    /**
+     * fungsi ini digunakan untuk update data pada tabel Detail cuti
+     * @param detailCuti Object
+     * @return true / false
+     */
     @Override
     public boolean update(DetailCuti detailCuti) {
         boolean flag = false;
-        String query ="UPDATE Dtcuti SET status=? WHERE id_dtcuti=?";
+        String query ="UPDATE Dt_Cuti SET status=? WHERE detail_id=?";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, detailCuti.getDetailCutiId());
             preparedStatement.setString(2, detailCuti.getKaryawanId());
             preparedStatement.setString(3, detailCuti.getCutiId());
             preparedStatement.setString(4, detailCuti.getStatusCuti());
-            preparedStatement.setString(5, detailCuti.getLamaCuti());
+            preparedStatement.setInt(5, detailCuti.getLamaCuti());
             preparedStatement.executeUpdate();
             flag = true;
         } catch (SQLException e) {
@@ -49,17 +60,21 @@ public class DetailCutiDAO implements DetailCutiInterfaceDAO{
         return flag;
     }
 
+    /**
+     * fungsi ini digunakan insert data pada tabel Detail cuti
+     * @return true / false
+     */
     @Override
     public boolean insert(DetailCuti detailCuti) {
         boolean flag = false;
-        String query = "INSERT INTO Dtcuti VALUES (?, ?, ?, ?, ?)";
+        String query = "INSERT INTO Dt_Cuti VALUES (?, ?, ?, ?, ?)";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, detailCuti.getDetailCutiId());
             preparedStatement.setString(2, detailCuti.getKaryawanId());
             preparedStatement.setString(3, detailCuti.getCutiId());
             preparedStatement.setString(4, detailCuti.getStatusCuti());
-            preparedStatement.setString(5, detailCuti.getLamaCuti());
+            preparedStatement.setInt(5, detailCuti.getLamaCuti());
             preparedStatement.executeUpdate();
             flag = true;
         } catch (SQLException e) {
@@ -68,9 +83,14 @@ public class DetailCutiDAO implements DetailCutiInterfaceDAO{
         return flag;
     }
 
+    /**
+     * fungsi ini digunakan untuk menghapus data pada tabel Detail cuti
+     * @param id String
+     * @return true / false
+     */
     @Override
     public boolean delete(String id) {
-        String query ="DELETE FROM Dtcuti WHERE id_dtcuti=?";
+        String query ="DELETE FROM Dt_Cuti WHERE detail_id=?";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, id);
@@ -82,10 +102,14 @@ public class DetailCutiDAO implements DetailCutiInterfaceDAO{
         return false;
     }
 
+    /**
+     * fungsi ini diguakan untuk menggambil/menampilkan data dari Tabel Detail cuti
+     * @return List
+     */
     @Override
     public List<DetailCuti> getAll() {
         List<DetailCuti> datas = new ArrayList<>();
-        String query = "SELECT d.id_dtcuti, k.nama_karyawan, j.nama_jabatan, k.email, c.tanggal_awal, c.tanggal_akhir, d.lama_cuti, c.keterangan, d.status FROM Dtcuti d JOIN Cuti c ON d.id_cuti=c.id_cuti JOIN Karyawan k ON d.id_karyawan=k.id_karyawan JOIN Jabatan j ON k.id_jabatan=j.id_jabatan;";
+        String query = "SELECT * FROM Dt_Cuti";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             ResultSet rs = preparedStatement.executeQuery();
@@ -95,7 +119,7 @@ public class DetailCutiDAO implements DetailCutiInterfaceDAO{
                 detailCuti.setKaryawanId(rs.getString(2));
                 detailCuti.setCutiId(rs.getString(3));
                 detailCuti.setStatusCuti(rs.getString(4));
-                detailCuti.setLamaCuti(rs.getString(5));
+                detailCuti.setLamaCuti(rs.getInt(5));
                 datas.add(detailCuti);
             }
         } catch (SQLException e) {
@@ -104,10 +128,16 @@ public class DetailCutiDAO implements DetailCutiInterfaceDAO{
         return datas;
     }
 
+    /**
+     * fungsi ini digunakan untuk menampilkan data dari tabel Detail cuti berdasarkan parameter
+     * @param category String parameter kategori yang akan dijadikan acuan mengurutkan data
+     * @param sort String mengurutkan data berdasarkan asc/desc
+     * @return List
+     */
     @Override
     public List<DetailCuti> getAll(String category, String sort) {
         List<DetailCuti> datas = new ArrayList<>();
-        String query = "SELECT * FROM Dtcuti ORDER BY " +category+ " " +sort;
+        String query = "SELECT * FROM Dt_Cuti ORDER BY " +category+ " " +sort;
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             ResultSet rs = preparedStatement.executeQuery();
@@ -117,7 +147,7 @@ public class DetailCutiDAO implements DetailCutiInterfaceDAO{
                 detailCuti.setKaryawanId(rs.getString(2));
                 detailCuti.setCutiId(rs.getString(3));
                 detailCuti.setStatusCuti(rs.getString(4));
-                detailCuti.setLamaCuti(rs.getString(5));
+                detailCuti.setLamaCuti(rs.getInt(5));
                 datas.add(detailCuti);
             }
         } catch (SQLException e) {
@@ -126,10 +156,16 @@ public class DetailCutiDAO implements DetailCutiInterfaceDAO{
         return datas;
     }
 
+    /**
+     * fungsi ini digunakan mencari data dari tabel Detail cuti dengan parameter tertentu
+     * @param category String parameter katgori yang akan dicari
+     * @param data String parameter kata kunci
+     * @return List
+     */
     @Override
     public List<DetailCuti> search(String category, String data) {
         List<DetailCuti> datas = new ArrayList<>();
-        String query = "SELECT * FROM Dtcuti WHERE " +category+ " LIKE '%" +data+ "%'";
+        String query = "SELECT * FROM Dt_Cuti WHERE " +category+ " LIKE '%" +data+ "%'";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             ResultSet rs = preparedStatement.executeQuery();
@@ -139,7 +175,7 @@ public class DetailCutiDAO implements DetailCutiInterfaceDAO{
                 detailCuti.setKaryawanId(rs.getString(2));
                 detailCuti.setCutiId(rs.getString(3));
                 detailCuti.setStatusCuti(rs.getString(4));
-                detailCuti.setLamaCuti(rs.getString(5));
+                detailCuti.setLamaCuti(rs.getInt(5));
                 datas.add(detailCuti);
             }
         } catch (SQLException e) {
@@ -148,10 +184,15 @@ public class DetailCutiDAO implements DetailCutiInterfaceDAO{
         return datas;
     }
 
+     /**
+     * fungsi ini digunakan untuk menampilkan data dari tabel Karyawan dengan parameter id
+     * @param id Integer
+     * @return Id
+     */
     @Override
     public DetailCuti getById(String id) {
         DetailCuti detailCuti = new DetailCuti();
-        String query = "SELECT * FROM Dtcuti WHERE id_dtcuti= " +id;
+        String query = "SELECT * FROM Dt_Cuti WHERE id_dtcuti= " +id;
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             ResultSet rs = preparedStatement.executeQuery();
@@ -160,7 +201,7 @@ public class DetailCutiDAO implements DetailCutiInterfaceDAO{
                 detailCuti.setKaryawanId(rs.getString(2));
                 detailCuti.setCutiId(rs.getString(3));
                 detailCuti.setStatusCuti(rs.getString(4));
-                detailCuti.setLamaCuti(rs.getString(5));
+                detailCuti.setLamaCuti(rs.getInt(5));
             }
         } catch (SQLException e) {
             Logger.getLogger(DetailCutiDAO.class.getName()).log(Level.SEVERE, null, e);

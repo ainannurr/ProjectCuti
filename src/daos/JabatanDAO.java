@@ -26,10 +26,19 @@ public class JabatanDAO implements JabatanInterfaceDAO{
     public JabatanDAO() {
     }
 
+    /**
+     * fungsi untuk memanggil koneksi
+     * @param connection Connection
+     */
     public JabatanDAO(Connection connection) {
         this.connection = connection;
     }
 
+    /**
+     * fungsi ini digunakan untuk update data pada tabel Jabatan
+     * @param jabatan Object
+     * @return true / false
+     */
     @Override
     public boolean update(Jabatan jabatan) {
         String query ="UPDATE Jabatan SET nama_jabatan=? WHERE jabatan_id=?";
@@ -45,6 +54,11 @@ public class JabatanDAO implements JabatanInterfaceDAO{
         return false;
     }
 
+    /**
+     * fungsi ini digunakan insert data pada tabel Jabatan
+     * @param jabatan Object
+     * @return true / false
+     */
     @Override
     public boolean insert(Jabatan jabatan) {
         boolean flag = false;
@@ -61,6 +75,11 @@ public class JabatanDAO implements JabatanInterfaceDAO{
         return flag;
     }
 
+    /**
+     * fungsi ini digunakan untuk menghapus data pada tabel Jabatan
+     * @param id String
+     * @return true / false
+     */
     @Override
     public boolean delete(String id) {
         String query ="DELETE FROM Jabatan WHERE jabatan_id=?";
@@ -74,7 +93,12 @@ public class JabatanDAO implements JabatanInterfaceDAO{
         }
         return false;
     }
+    
 
+     /**
+     * fungsi ini diguakan untuk menggambil/menampilkan data dari Tabel Jabatan
+     * @return List
+     */
     @Override
     public List<Jabatan> getAll() {
         List<Jabatan> datas = new ArrayList<>();
@@ -93,7 +117,14 @@ public class JabatanDAO implements JabatanInterfaceDAO{
         }
         return datas;
     }
+    
 
+    /**
+     * fungsi ini digunakan untuk menampilkan data dari tabel Jabatan berdasarkan parameter
+     * @param category String parameter kategori yang akan dijadikan acuan mengurutkan data
+     * @param sort String mengurutkan data berdasarkan asc/desc
+     * @return List
+     */
     @Override
     public List<Jabatan> getAllSort(String category, String sort) {
         List<Jabatan> datas = new ArrayList<>();
@@ -113,6 +144,12 @@ public class JabatanDAO implements JabatanInterfaceDAO{
         return datas;
     }
 
+     /**
+     * fungsi ini digunakan mencari data dari tabel Jabatan dengan parameter tertentu
+     * @param category String parameter katgori yang akan dicari
+     * @param data String parameter kata kunci
+     * @return List
+     */
     @Override
     public List<Jabatan> search(String category, String data) {
         List<Jabatan> datas = new ArrayList<>();
@@ -132,6 +169,11 @@ public class JabatanDAO implements JabatanInterfaceDAO{
         return datas;
     }
 
+    /**
+     * fungsi ini digunakan untuk menampilkan data dari tabel Jabatan dengan parameter id
+     * @param id Integer
+     * @return id
+     */
     @Override
     public Jabatan getById(String id) {
         Jabatan jabatan = new Jabatan();

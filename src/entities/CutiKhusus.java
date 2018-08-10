@@ -7,12 +7,11 @@ package entities;
 
 /**
  *
- * @author Simbok_pc
+ * @author AINAN-Gaul
  */
 public class CutiKhusus {
     private String cutiKhususId;
     private String namaCuti;
-    
 
     public CutiKhusus() {
     }
@@ -20,35 +19,21 @@ public class CutiKhusus {
     public CutiKhusus(String cutiKhususId, String namaCuti) {
         this.cutiKhususId = cutiKhususId;
         this.namaCuti = namaCuti;
-        
     }
-   
-    /**
-     * @return the cutiKhususId
-     */
+
     public String getCutiKhususId() {
         return cutiKhususId;
     }
 
-    /**
-     * @param cutiKhususId the cutiKhususId to set
-     */
     public void setCutiKhususId(String cutiKhususId) {
         this.cutiKhususId = cutiKhususId;
     }
 
-    /**
-     * @return the keteranganCuti
-     */
     public String getNamaCuti() {
         return namaCuti;
     }
 
-    /**
-     * @param namaCuti the keteranganCuti to set
-     */
     public void setNamaCuti(String namaCuti) {
         this.namaCuti = namaCuti;
     }
- 
 }

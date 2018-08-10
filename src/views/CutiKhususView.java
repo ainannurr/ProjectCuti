@@ -175,7 +175,11 @@ public class CutiKhususView extends javax.swing.JInternalFrame {
     private void txtCutiKhususIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCutiKhususIDActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtCutiKhususIDActionPerformed
-
+    
+    /**
+     * fungsi yang digunakan untuk menyimpan data ketika menekan tombol save
+     * @param evt 
+     */
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
        boolean flag = this.cutiKhususController.save(txtCutiKhususID.getText(), txtNamaCuti.getText());
        String message = "Failed to save data...";
@@ -188,7 +192,11 @@ public class CutiKhususView extends javax.swing.JInternalFrame {
         bindingTable();
         reset();
     }//GEN-LAST:event_btnSaveActionPerformed
-
+    
+    /**
+     * fungsi yang digunakan untuk menyimpan data ketika menekan tombol edit
+     * @param evt 
+     */
     private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
         boolean flag = this.cutiKhususController.edit(txtCutiKhususID.getText(), txtNamaCuti.getText());
         String message = "Failed to edit data";
@@ -199,16 +207,24 @@ public class CutiKhususView extends javax.swing.JInternalFrame {
         bindingTable();
         reset();
     }//GEN-LAST:event_btnEditActionPerformed
-
+    
+    /**
+     * fungsi yang digunakan untuk menampilkan data ke text filed ketika memilih data
+     * @param evt 
+     */
     private void tblCutiKhususMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblCutiKhususMouseClicked
         int row = tblCutiKhusus.getSelectedRow();
         txtCutiKhususID.setText(tblCutiKhusus.getValueAt(row, 0).toString());
         txtNamaCuti.setText(tblCutiKhusus.getValueAt(row, 1).toString());
     }//GEN-LAST:event_tblCutiKhususMouseClicked
-
+    
+    /**
+     * fungsi yang digunakan untuk menghapus data ketika menekan tombol drop
+     * @param evt 
+     */
     private void btnDropActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDropActionPerformed
         String message = "Failed to edit data...";
-        int flag = JOptionPane.showConfirmDialog(this, "Really?", "ARE YOU SURE FOR DELETE DATA?", 
+        int flag = JOptionPane.showConfirmDialog(this, "Tenane?", "APA KOE YAKIN MEH NGEHAPUS?", 
                 JOptionPane.YES_NO_OPTION);
         if (flag == 0){
             if (cutiKhususController.drop(txtCutiKhususID.getText())){
@@ -236,23 +252,26 @@ public class CutiKhususView extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtNamaCuti;
     // End of variables declaration//GEN-END:variables
 
-
-    public void bindingTable(){
-    String[] header = {"Cuti Khusus ID","Nama Cuti"};
-    DefaultTableModel defaultTableModel = new DefaultTableModel(header, 0);
+    /**
+     * fungsi yang digunakan untuk menampilkan tabel data cuti khusus
+     */
+    public void bindingTable() {
+        String[] header = {"Cuti Khusus ID", "Nama Cuti"};
+        DefaultTableModel defaultTableModel = new DefaultTableModel(header, 0);
         for (CutiKhusus cutiKhusus : cutiKhususController.binding()) {
             Object[] cutiKhusus1 = {
-                cutiKhusus.getCutiKhususId(),cutiKhusus.getNamaCuti()
-        };
-        defaultTableModel.addRow(cutiKhusus1);
-    }
+                cutiKhusus.getCutiKhususId(), cutiKhusus.getNamaCuti()
+            };
+            defaultTableModel.addRow(cutiKhusus1);
+        }
         tblCutiKhusus.setModel(defaultTableModel);
-        
-}
+    }
 
-public void reset(){
-    txtCutiKhususID.setText("");
-    txtNamaCuti.setText("");
-}
-
+    /**
+     * fungsi yang digunakan untuk membersihkan data ketika menyimpan atau menghapus data
+     */
+    public void reset() {
+        txtCutiKhususID.setText("");
+        txtNamaCuti.setText("");
+    }
 }

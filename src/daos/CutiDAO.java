@@ -29,7 +29,7 @@ public class CutiDAO implements CutiInterfaceDAO{
     
     /**
      * fungsi untuk memanggil koneksi
-     * @param connection 
+     * @param connection Connection
      */
     public CutiDAO(Connection connection){
         this.connection=connection;
@@ -37,7 +37,7 @@ public class CutiDAO implements CutiInterfaceDAO{
 
     /**
      * fungsi ini digunakan untuk insert data pada tabel Cuti
-     * @param cuti
+     * @param cuti Object
      * @return true / false
      */
     @Override
@@ -47,10 +47,10 @@ public class CutiDAO implements CutiInterfaceDAO{
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, cuti.getCutiId());
-            preparedStatement.setDate(2, java.sql.Date.valueOf(tanggalAwal));
-            preparedStatement.setDate(3, java.sql.Date.valueOf(tanggalAkhir));
-            preparedStatement.setString(4, cuti.getKeterangan());
-            preparedStatement.setString(5, cuti.getIdCutiKhusus());
+            preparedStatement.setString(2, cuti.getCkId());
+            preparedStatement.setDate(3, java.sql.Date.valueOf(tanggalAwal));
+            preparedStatement.setDate(4, java.sql.Date.valueOf(tanggalAkhir));
+            preparedStatement.setString(5, cuti.getKeterangan());
             preparedStatement.executeUpdate();
             flag = true;
         } catch (SQLException ex) {
@@ -61,18 +61,18 @@ public class CutiDAO implements CutiInterfaceDAO{
 
     /**
      * fungsi ini digunakan mengedit data pada tabel Cuti
-     * @param cuti
+     * @param cuti Object
      * @return true / false
      */
     @Override
     public boolean update(Cuti cuti) {
-        String query = "UPDATE Cuti SET tanggal_awal=?, tanggal_akhir=?, keterangan=?, id_cuti_khusus=? WHERE id_cuti=?";
+        String query = "UPDATE Cuti SET tanggal_awal=?, tanggal_akhir=?, keterangan=?, ck_id=? WHERE cuti_id=?";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setDate(1, java.sql.Date.valueOf(tanggalAwal));
             preparedStatement.setDate(2, java.sql.Date.valueOf(tanggalAkhir));
             preparedStatement.setString(3, cuti.getKeterangan());
-            preparedStatement.setString(4, cuti.getIdCutiKhusus());
+            preparedStatement.setString(4, cuti.getCkId());
             preparedStatement.setString(5, cuti.getCutiId());
             preparedStatement.executeUpdate();
             return true;
@@ -103,7 +103,7 @@ public class CutiDAO implements CutiInterfaceDAO{
 
     /**
      * fungsi ini diguakan untuk menggambil/menampilkan data dari Tabel Cuti
-     * @return 
+     * @return List
      */
     @Override
     public List<Cuti> getAll() {
@@ -114,11 +114,11 @@ public class CutiDAO implements CutiInterfaceDAO{
             ResultSet rs=preparedStatement.executeQuery();
             while(rs.next()){
                 Cuti cuti=new Cuti();
-                cuti.setCutiId(rs.getString("id_cuti"));
-                cuti.setTanggal_awal(rs.getDate("tanggal_awal"));
-                cuti.setTanggal_akhir(rs.getDate("tanggal_akhir"));
+                cuti.setCutiId(rs.getString("cuti_id"));
+                cuti.setCkId(rs.getString("ck_id"));
+                cuti.setTanggalAwal(rs.getDate("tanggal_awal"));
+                cuti.setTanggalAkhir(rs.getDate("tanggal_akhir"));
                 cuti.setKeterangan(rs.getString("keterangan"));
-                cuti.setIdCutiKhusus(rs.getString("id_cuti_khusus"));
                 datas.add(cuti);
             }
         } catch (SQLException ex) {
@@ -129,9 +129,9 @@ public class CutiDAO implements CutiInterfaceDAO{
 
     /**
      * fungsi ini digunakan untuk menampilkan data dari tabel Cuti berdasarkan parameter
-     * @param category String --> parameter kategori yang akan dijadikan acuan mengurutkan data
-     * @param sort String --> mengurutkan data berdasarkan asc/desc
-     * @return 
+     * @param category String parameter kategori yang akan dijadikan acuan mengurutkan data
+     * @param sort String mengurutkan data berdasarkan asc/desc
+     * @return List
      */
     @Override
     public List<Cuti> getAllSort(String category, String sort) {
@@ -142,11 +142,11 @@ public class CutiDAO implements CutiInterfaceDAO{
             ResultSet rs=preparedStatement.executeQuery();
             while(rs.next()){
                 Cuti cuti = new Cuti();
-                cuti.setCutiId(rs.getString("id_cuti"));
-                cuti.setTanggal_awal(rs.getDate("tanggal_awal"));
-                cuti.setTanggal_akhir(rs.getDate("tanggal_akhir"));
+                cuti.setCutiId(rs.getString("cuti_id"));
+                cuti.setCkId(rs.getString("ck_id"));
+                cuti.setTanggalAwal(rs.getDate("tanggal_awal"));
+                cuti.setTanggalAkhir(rs.getDate("tanggal_akhir"));
                 cuti.setKeterangan(rs.getString("keterangan"));
-                cuti.setIdCutiKhusus(rs.getString("id_cuti_khusus"));
                 datas.add(cuti);
             }
         } catch (SQLException ex) {
@@ -157,9 +157,9 @@ public class CutiDAO implements CutiInterfaceDAO{
 
     /**
      * fungsi ini digunakan mencari data dari tabel Cuti dengan parameter tertentu
-     * @param category String --> parameter katgori yang akan dicari
-     * @param data String --> parameter kata kunci
-     * @return 
+     * @param category String parameter katgori yang akan dicari
+     * @param data String parameter kata kunci
+     * @return List
      */
     @Override
     public List<Cuti> search(String category, String data) {
@@ -170,11 +170,11 @@ public class CutiDAO implements CutiInterfaceDAO{
             ResultSet rs=preparedStatement.executeQuery();
             while(rs.next()){
                 Cuti cuti = new Cuti();
-                cuti.setCutiId(rs.getString("id_cuti"));
-                cuti.setTanggal_awal(rs.getDate("tanggal_awal"));
-                cuti.setTanggal_akhir(rs.getDate("tanggal_akhir"));
+                cuti.setCutiId(rs.getString("cuti_id"));
+                cuti.setCkId(rs.getString("ck_id"));
+                cuti.setTanggalAwal(rs.getDate("tanggal_awal"));
+                cuti.setTanggalAkhir(rs.getDate("tanggal_akhir"));
                 cuti.setKeterangan(rs.getString("keterangan"));
-                cuti.setIdCutiKhusus(rs.getString("id_cuti_khusus"));
                 datas.add(cuti);
             }
         } catch (SQLException ex) {
@@ -186,7 +186,7 @@ public class CutiDAO implements CutiInterfaceDAO{
     /**
      * fungsi ini digunakan untuk menampilkan data dari tabel Cuti dengan parameter id
      * @param id Integer
-     * @return 
+     * @return cuti
      */
     @Override
     public Cuti getById(String id) {
@@ -196,11 +196,11 @@ public class CutiDAO implements CutiInterfaceDAO{
             PreparedStatement preparedStatement=connection.prepareStatement(query);
             ResultSet rs=preparedStatement.executeQuery();
             while(rs.next()){
-                cuti.setCutiId(rs.getString("id_cuti"));
-                cuti.setTanggal_awal(rs.getDate("tanggal_awal"));
-                cuti.setTanggal_akhir(rs.getDate("tanggal_akhir"));
+                cuti.setCutiId(rs.getString("cuti_id"));
+                cuti.setCkId(rs.getString("ck_id"));
+                cuti.setTanggalAwal(rs.getDate("tanggal_awal"));
+                cuti.setTanggalAkhir(rs.getDate("tanggal_akhir"));
                 cuti.setKeterangan(rs.getString("keterangan"));
-                cuti.setIdCutiKhusus(rs.getString("id_cuti_khusus"));
             }
         } catch (SQLException ex) {
             Logger.getLogger(CutiDAO.class.getName()).log(Level.SEVERE, null, ex);

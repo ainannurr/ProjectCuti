@@ -61,7 +61,6 @@ public class DetailCutiView extends javax.swing.JInternalFrame {
         setIconifiable(true);
         setMaximizable(true);
         setResizable(true);
-        setTitle("Detail Cuti");
 
         tblDetailCuti.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -209,6 +208,10 @@ public class DetailCutiView extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtCutiIDActionPerformed
 
+    /**
+     * fungsi yang digunakan untuk menyimpan data ketika menekan tombol save
+     * @param evt 
+     */
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         boolean flag = this.detailCutiController.save(txtDetCutiID.getText(), txtCutiID.getText(), txtKaryID.getText(),
                 txtLamaCuti.getText(), txtStatus.getText());
@@ -223,6 +226,10 @@ public class DetailCutiView extends javax.swing.JInternalFrame {
         reset();
     }//GEN-LAST:event_btnSaveActionPerformed
 
+    /**
+     * fungsi yang digunakan untuk menyimpan data ketika menekan tombol edit
+     * @param evt 
+     */
     private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
         boolean flag = this.detailCutiController.save(txtDetCutiID.getText(), txtCutiID.getText(), txtKaryID.getText(),
                 txtLamaCuti.getText(), txtStatus.getText());
@@ -235,6 +242,10 @@ public class DetailCutiView extends javax.swing.JInternalFrame {
         reset();
     }//GEN-LAST:event_btnEditActionPerformed
 
+    /**
+     * fungsi yang digunakan untuk menghapus data ketika menekan tombol drop
+     * @param evt 
+     */
     private void btnDropActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDropActionPerformed
         String message = "Failed to edit data...";
         int flag = JOptionPane.showConfirmDialog(this, "Tenane?", "APA KOE YAKIN MEH NGEHAPUS?", 
@@ -250,6 +261,10 @@ public class DetailCutiView extends javax.swing.JInternalFrame {
         reset();
     }//GEN-LAST:event_btnDropActionPerformed
 
+    /**
+     * fungsi yang digunakan untuk menampilkan data ke text filed ketika memilih data
+     * @param evt 
+     */
     private void tblDetailCutiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDetailCutiMouseClicked
         int row = tblDetailCuti.getSelectedRow();
         txtDetCutiID.setText(tblDetailCuti.getValueAt(row, 0).toString());
@@ -280,26 +295,32 @@ public class DetailCutiView extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtStatus;
     // End of variables declaration//GEN-END:variables
 
-public void bindingTable(){
-    String[] header = {"Detail Cuti ID","Cuti ID","Karyawan ID","Lama Cuti","Status"};
-    DefaultTableModel defaultTableModel = new DefaultTableModel(header, 0);
+    /**
+     * fungsi yang digunakan untuk menampilkan tabel data cuti khusus
+     */
+    public void bindingTable() {
+        String[] header = {"Detail Cuti ID", "Cuti ID", "Karyawan ID", "Lama Cuti", "Status"};
+        DefaultTableModel defaultTableModel = new DefaultTableModel(header, 0);
         for (DetailCuti detailCuti : detailCutiController.binding()) {
             Object[] detailCuti1 = {
                 detailCuti.getDetailCutiId(), detailCuti.getCutiId(), detailCuti.getKaryawanId(), detailCuti.getLamaCuti(),
                 detailCuti.getStatusCuti()
             };
             defaultTableModel.addRow(detailCuti1);
-    }
+        }
         tblDetailCuti.setModel(defaultTableModel);
-        
-}
 
-public void reset(){
-    txtDetCutiID.setText("");
-    txtCutiID.setText("");
-    txtKaryID.setText("");
-    txtLamaCuti.setText("");
-    txtStatus.setText("");
-}
+    }
+
+    /**
+     * fungsi yang digunakan untuk membersihkan data ketika menyimpan atau menghapus data
+     */
+    public void reset() {
+        txtDetCutiID.setText("");
+        txtCutiID.setText("");
+        txtKaryID.setText("");
+        txtLamaCuti.setText("");
+        txtStatus.setText("");
+    }
 
 }

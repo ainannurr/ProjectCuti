@@ -60,7 +60,6 @@ public class MainView extends javax.swing.JFrame {
         mnForm = new javax.swing.JMenu();
         formPengajuanCuti = new javax.swing.JMenuItem();
         jMenu13 = new javax.swing.JMenu();
-        mnDetail = new javax.swing.JMenuItem();
 
         jMenuItem1.setText("jMenuItem1");
 
@@ -183,16 +182,6 @@ public class MainView extends javax.swing.JFrame {
         jMenuBar1.add(mnForm);
 
         jMenu13.setText("Direktur");
-
-        mnDetail.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F1, java.awt.event.InputEvent.CTRL_MASK));
-        mnDetail.setText("Detail");
-        mnDetail.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mnDetailActionPerformed(evt);
-            }
-        });
-        jMenu13.add(mnDetail);
-
         jMenuBar1.add(jMenu13);
 
         setJMenuBar(jMenuBar1);
@@ -250,12 +239,6 @@ public class MainView extends javax.swing.JFrame {
         formView.show();
         dsktForm.add(formView);
     }//GEN-LAST:event_formPengajuanCutiActionPerformed
-
-    private void mnDetailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnDetailActionPerformed
-//        DirekturView direkturView = new DirekturView();
-//        direkturView.show();
-//        dsktMaster.add(direkturView);
-    }//GEN-LAST:event_mnDetailActionPerformed
 
     /**
      * @param args the command line arguments
@@ -318,7 +301,6 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem mnCuti;
     private javax.swing.JMenuItem mnCutiKhusus;
-    private javax.swing.JMenuItem mnDetail;
     private javax.swing.JMenuItem mnDetailCuti;
     private javax.swing.JMenu mnForm;
     private javax.swing.JMenuItem mnJabatan;

@@ -5,23 +5,23 @@
  */
 package entities;
 
-import java.sql.Date;
+import java.util.Date;
 
 /**
  *
- * @author Simbok_pc
+ * @author AINAN-Gaul
  */
 public class DetailCuti {
     private String detailCutiId;
     private String karyawanId;
     private String cutiId;
     private String statusCuti;
-    private String lamaCuti;
+    private int lamaCuti;
 
     public DetailCuti() {
     }
 
-    public DetailCuti(String detailCutiId, String karyawanId, String cutiId, String statusCuti, String lamaCuti) {
+    public DetailCuti(String detailCutiId, String karyawanId, String cutiId, String statusCuti, int lamaCuti) {
         this.detailCutiId = detailCutiId;
         this.karyawanId = karyawanId;
         this.cutiId = cutiId;
@@ -60,12 +60,14 @@ public class DetailCuti {
     public void setStatusCuti(String statusCuti) {
         this.statusCuti = statusCuti;
     }
-    
-    public String getLamaCuti() {
+
+    public int getLamaCuti() {
         return lamaCuti;
     }
 
-    public void setLamaCuti(String lamaCuti) {
+    public void setLamaCuti(int lamaCuti) {
         this.lamaCuti = lamaCuti;
     }
+
+    
 }

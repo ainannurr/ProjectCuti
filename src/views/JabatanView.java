@@ -164,6 +164,10 @@ public class JabatanView extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * fungsi yang digunakan untuk menyimpan data ketika menekan tombol save
+     * @param evt 
+     */
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         boolean flag = this.jabatanController.save(inputJabatanId.getText(), inputJabatanNama.getText());
         String messege = "Failed to save data!";
@@ -175,6 +179,10 @@ public class JabatanView extends javax.swing.JInternalFrame {
         reset();
     }//GEN-LAST:event_btnSaveActionPerformed
 
+    /**
+     * fungsi yang digunakan untuk menyimpan data ketika menekan tombol edit
+     * @param evt 
+     */
     private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
         String messege = "Failed to edit data.";
         if(jabatanController.edit(inputJabatanId.getText(), inputJabatanNama.getText())){
@@ -185,6 +193,10 @@ public class JabatanView extends javax.swing.JInternalFrame {
         reset();
     }//GEN-LAST:event_btnEditActionPerformed
 
+    /**
+     * fungsi yang digunakan untuk menghapus data ketika menekan tombol drop
+     * @param evt 
+     */
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         String messege = "Failed to delete data.";
         int flag = JOptionPane.showConfirmDialog(this, "Are you sure want to delete?", "Alert", JOptionPane.YES_NO_OPTION);
@@ -198,6 +210,10 @@ public class JabatanView extends javax.swing.JInternalFrame {
         reset();
     }//GEN-LAST:event_btnDeleteActionPerformed
 
+    /**
+     * fungsi yang digunakan untuk menampilkan data ke text filed ketika memilih data
+     * @param evt 
+     */
     private void tblJabatanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblJabatanMouseClicked
         int row = tblJabatan.getSelectedRow();
         inputJabatanId.setText(tblJabatan.getValueAt(row, 0).toString());
@@ -219,6 +235,9 @@ public class JabatanView extends javax.swing.JInternalFrame {
     private javax.swing.JTable tblJabatan;
     // End of variables declaration//GEN-END:variables
     
+    /**
+     * fungsi yang digunakan untuk menampilkan tabel data cuti khusus
+     */
     public void bindingTable(){
         String[] header = {"ID Jabatan", "Nama Jabatan"};
         DefaultTableModel defaultTableModel = new DefaultTableModel(header, 0);
@@ -231,6 +250,9 @@ public class JabatanView extends javax.swing.JInternalFrame {
         tblJabatan.setModel(defaultTableModel);
     }
     
+    /**
+     * fungsi yang digunakan untuk membersihkan data ketika menyimpan atau menghapus data
+     */
     public void reset(){
         inputJabatanId.setText("");
         inputJabatanNama.setText("");

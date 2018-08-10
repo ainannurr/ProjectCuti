@@ -25,10 +25,19 @@ public class KaryawanDAO implements KaryawanInterfaceDAO{
     public KaryawanDAO() {
     }
 
+    /**
+     * fungsi untuk memanggil koneksi
+     * @param connection Connection
+     */
     public KaryawanDAO(Connection connection) {
         this.connection = connection;
     }
 
+    /**
+     * fungsi ini digunakan untuk update data pada tabel Karyawan
+     * @param karyawan Object
+     * @return true / false
+     */
     @Override
     public boolean update(Karyawan karyawan) {
         String query ="UPDATE Karyawan SET nama_karyawan=?, email=?, alamat=?, jatah_cuti=?, jabatan_id=? WHERE karyawan_id=?";
@@ -48,6 +57,11 @@ public class KaryawanDAO implements KaryawanInterfaceDAO{
         return false;
     }
 
+    /**
+     * fungsi ini digunakan insert data pada tabel Karyawan
+     * @param karyawan Object
+     * @return true / false
+     */
     @Override
     public boolean insert(Karyawan karyawan) {
         boolean flag = false;
@@ -68,6 +82,11 @@ public class KaryawanDAO implements KaryawanInterfaceDAO{
         return flag;
     }
 
+    /**
+     * fungsi ini digunakan untuk menghapus data pada tabel Karyawan
+     * @param id String
+     * @return true / false
+     */
     @Override
     public boolean delete(String id) {
         String query ="DELETE FROM Karyawan WHERE karyawan_id=?";
@@ -82,6 +101,10 @@ public class KaryawanDAO implements KaryawanInterfaceDAO{
         return false;
     }
 
+    /**
+     * fungsi ini diguakan untuk menggambil/menampilkan data dari Tabel Karyawan
+     * @return List
+     */
     @Override
     public List<Karyawan> getAll() {
         List<Karyawan> datas = new ArrayList<>();
@@ -105,6 +128,12 @@ public class KaryawanDAO implements KaryawanInterfaceDAO{
         return datas;
     }
 
+    /**
+     * fungsi ini digunakan untuk menampilkan data dari tabel Karyawan berdasarkan parameter
+     * @param category String parameter kategori yang akan dijadikan acuan mengurutkan data
+     * @param sort String mengurutkan data berdasarkan asc/desc
+     * @return List
+     */
     @Override
     public List<Karyawan> getAll(String category, String sort) {
         List<Karyawan> datas = new ArrayList<>();
@@ -128,6 +157,12 @@ public class KaryawanDAO implements KaryawanInterfaceDAO{
         return datas;
     }
 
+    /**
+     * fungsi ini digunakan mencari data dari tabel Karyawan dengan parameter tertentu
+     * @param category String parameter katgori yang akan dicari
+     * @param data String parameter kata kunci
+     * @return List
+     */
     @Override
     public List<Karyawan> search(String category, String data) {
         List<Karyawan> datas = new ArrayList<>();
@@ -151,6 +186,11 @@ public class KaryawanDAO implements KaryawanInterfaceDAO{
         return datas;
     }
 
+    /**
+     * fungsi ini digunakan untuk menampilkan data dari tabel Karyawan dengan parameter id
+     * @param id Integer
+     * @return id
+     */
     @Override
     public Karyawan getById(String id) {
         Karyawan karyawan = new Karyawan();
